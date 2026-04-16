@@ -1,8 +1,40 @@
 @import "tailwindcss";
 
+/* ===== Stripe HDS Core Color Tokens ===== */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Core Brand (Indigo/Purple) */
+  --hds-color-core-brand-25: #f8f7ff;
+  --hds-color-core-brand-50: #eeedff;
+  --hds-color-core-brand-75: #e0dfff;
+  --hds-color-core-brand-100: #d4d2ff;
+  --hds-color-core-brand-200: #b9b9f9;
+  --hds-color-core-brand-300: #9a9afe;
+  --hds-color-core-brand-400: #7a73ff;
+  --hds-color-core-brand-500: #6c63ff;
+  --hds-color-core-brand-600: #635bff;
+  --hds-color-core-brand-700: #5046e5;
+  --hds-color-core-brand-800: #3d35c2;
+  --hds-color-core-brand-900: #2e2898;
+  --hds-color-core-brand-925: #221d72;
+  --hds-color-core-brand-950: #181454;
+  --hds-color-core-brand-975: #0f0d38;
+
+  /* Accent gradient colors from HDS */
+  --hds-gradient-lemon-start: #ffd552;
+  --hds-gradient-lemon-mid: #ffaf2d;
+  --hds-gradient-lemon-end: #ff9014;
+  --hds-gradient-orange-start: #fe8c2d;
+  --hds-gradient-orange-mid: #fd6252;
+  --hds-gradient-orange-end: #fd5d7c;
+  --hds-gradient-magenta-start: #f98bf9;
+  --hds-gradient-magenta-mid: #f96bee;
+  --hds-gradient-magenta-end: #b262f9;
+  --hds-gradient-ruby-start: #fd7184;
+  --hds-gradient-ruby-mid: #e8566a;
+  --hds-gradient-ruby-end: #c9405a;
 }
 
 @theme inline {
@@ -35,13 +67,229 @@ body {
   }
 }
 
-@keyframes gradient-move {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* ===== Flowing Gradient Ribbons ===== */
+
+.hero-gradient-wrap {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  overflow: hidden;
 }
 
-.animate-gradient {
-  background-size: 200% 200%;
-  animation: gradient-move 15s ease infinite;
+/* Base ribbon styling */
+.ribbon {
+  position: absolute;
+  border-radius: 40% 60% 55% 45% / 50% 45% 55% 50%;
+  filter: blur(2px);
+  will-change: transform;
+}
+
+/* Ribbon 1 — Lemon/Amber sweep (top-right, large) */
+.ribbon-1 {
+  width: 55%;
+  height: 120%;
+  top: -20%;
+  right: -5%;
+  background: linear-gradient(
+    160deg,
+    var(--hds-gradient-lemon-start) 0%,
+    var(--hds-gradient-lemon-mid) 35%,
+    var(--hds-gradient-orange-start) 65%,
+    var(--hds-gradient-orange-mid) 100%
+  );
+  opacity: 0.55;
+  animation: flow1 18s ease-in-out infinite;
+}
+
+/* Ribbon 2 — Magenta/Violet thread (center-right) */
+.ribbon-2 {
+  width: 45%;
+  height: 110%;
+  top: -10%;
+  right: 2%;
+  background: linear-gradient(
+    170deg,
+    var(--hds-gradient-magenta-start) 0%,
+    var(--hds-gradient-magenta-mid) 40%,
+    var(--hds-gradient-magenta-end) 80%,
+    var(--hds-color-core-brand-400) 100%
+  );
+  opacity: 0.5;
+  animation: flow2 22s ease-in-out infinite;
+}
+
+/* Ribbon 3 — Orange/Ruby thread (mid, overlapping) */
+.ribbon-3 {
+  width: 40%;
+  height: 105%;
+  top: -5%;
+  right: 8%;
+  background: linear-gradient(
+    155deg,
+    var(--hds-gradient-orange-start) 0%,
+    var(--hds-gradient-orange-mid) 30%,
+    var(--hds-gradient-ruby-start) 60%,
+    var(--hds-gradient-magenta-start) 100%
+  );
+  opacity: 0.45;
+  animation: flow3 20s ease-in-out infinite;
+}
+
+/* Ribbon 4 — Soft lavender/brand thread (behind others) */
+.ribbon-4 {
+  width: 50%;
+  height: 115%;
+  top: -15%;
+  right: -2%;
+  background: linear-gradient(
+    165deg,
+    var(--hds-color-core-brand-200) 0%,
+    var(--hds-color-core-brand-300) 30%,
+    var(--hds-gradient-magenta-end) 60%,
+    var(--hds-color-core-brand-500) 100%
+  );
+  opacity: 0.35;
+  animation: flow4 25s ease-in-out infinite;
+}
+
+/* Ribbon 5 — Warm golden highlight thread (narrow, foreground) */
+.ribbon-5 {
+  width: 35%;
+  height: 100%;
+  top: -8%;
+  right: 12%;
+  background: linear-gradient(
+    150deg,
+    var(--hds-gradient-lemon-start) 0%,
+    var(--hds-gradient-lemon-mid) 25%,
+    var(--hds-gradient-orange-start) 50%,
+    var(--hds-gradient-ruby-start) 75%,
+    var(--hds-gradient-magenta-start) 100%
+  );
+  opacity: 0.4;
+  animation: flow5 16s ease-in-out infinite;
+}
+
+/* White fade overlays */
+.hero-fade-left {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to right,
+    white 25%,
+    rgba(255, 255, 255, 0.85) 38%,
+    rgba(255, 255, 255, 0.4) 52%,
+    transparent 68%
+  );
+}
+
+.hero-fade-bottom {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 10rem;
+  background: linear-gradient(to top, white, transparent);
+}
+
+/* ===== Flow Keyframes — silk threads in wind ===== */
+
+@keyframes flow1 {
+  0% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleX(1);
+  }
+  20% {
+    transform: translateY(-4%) translateX(2%) skewY(-3deg) rotate(1.5deg) scaleX(1.03);
+  }
+  40% {
+    transform: translateY(-1%) translateX(-1%) skewY(1.5deg) rotate(-0.5deg) scaleX(0.98);
+  }
+  60% {
+    transform: translateY(-5%) translateX(3%) skewY(-2deg) rotate(2deg) scaleX(1.04);
+  }
+  80% {
+    transform: translateY(-2%) translateX(0.5%) skewY(1deg) rotate(-1deg) scaleX(1.01);
+  }
+  100% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleX(1);
+  }
+}
+
+@keyframes flow2 {
+  0% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleY(1);
+  }
+  15% {
+    transform: translateY(-3%) translateX(-2%) skewY(2.5deg) rotate(-1.5deg) scaleY(1.02);
+  }
+  35% {
+    transform: translateY(-6%) translateX(1.5%) skewY(-1.5deg) rotate(1deg) scaleY(0.97);
+  }
+  55% {
+    transform: translateY(-2%) translateX(-1%) skewY(2deg) rotate(-0.8deg) scaleY(1.03);
+  }
+  75% {
+    transform: translateY(-5%) translateX(2%) skewY(-2.5deg) rotate(1.5deg) scaleY(0.99);
+  }
+  100% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleY(1);
+  }
+}
+
+@keyframes flow3 {
+  0% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scale(1);
+  }
+  18% {
+    transform: translateY(-5%) translateX(3%) skewY(-2deg) rotate(2deg) scale(1.02);
+  }
+  38% {
+    transform: translateY(-2%) translateX(-2%) skewY(3deg) rotate(-1deg) scale(0.99);
+  }
+  58% {
+    transform: translateY(-7%) translateX(1%) skewY(-1deg) rotate(1.5deg) scale(1.03);
+  }
+  78% {
+    transform: translateY(-3%) translateX(-1%) skewY(2deg) rotate(-0.5deg) scale(1.01);
+  }
+  100% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scale(1);
+  }
+}
+
+@keyframes flow4 {
+  0% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleX(1);
+  }
+  25% {
+    transform: translateY(-3%) translateX(-1.5%) skewY(1.5deg) rotate(-1deg) scaleX(1.02);
+  }
+  50% {
+    transform: translateY(-6%) translateX(2%) skewY(-2deg) rotate(1.5deg) scaleX(0.98);
+  }
+  75% {
+    transform: translateY(-2%) translateX(-0.5%) skewY(1deg) rotate(-0.5deg) scaleX(1.01);
+  }
+  100% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scaleX(1);
+  }
+}
+
+@keyframes flow5 {
+  0% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scale(1);
+  }
+  20% {
+    transform: translateY(-6%) translateX(2.5%) skewY(-3.5deg) rotate(2.5deg) scale(1.04);
+  }
+  45% {
+    transform: translateY(-1%) translateX(-2%) skewY(2deg) rotate(-1.5deg) scale(0.98);
+  }
+  70% {
+    transform: translateY(-5%) translateX(1.5%) skewY(-1.5deg) rotate(1deg) scale(1.02);
+  }
+  100% {
+    transform: translateY(0%) translateX(0%) skewY(0deg) rotate(0deg) scale(1);
+  }
 }
