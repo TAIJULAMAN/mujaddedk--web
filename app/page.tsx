@@ -1,8 +1,7 @@
 import StripeHero from "@/components/StripeHero";
 import StripeProducts from "@/components/StripeProducts";
-import StripeCodePreview from "@/components/StripeCodePreview";
+import StripeSessions from "@/components/StripeSessions";
 import StripeGlobalScale from "@/components/StripeGlobalScale";
-import StripePricing from "@/components/StripePricing";
 import StripeCTA from "@/components/StripeCTA";
 import StripeFooter from "@/components/StripeFooter";
 
@@ -11,9 +10,8 @@ export default function Home() {
     <>
       <StripeHero />
       <StripeProducts />
-      <StripeCodePreview />
+      <StripeSessions />
       <StripeGlobalScale />
-      <StripePricing />
       <StripeCTA />
       <StripeFooter />
     </>
