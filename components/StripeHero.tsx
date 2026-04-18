@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { motion, Variants } from "framer-motion";
 import { Menu } from "lucide-react";
 import Link from "next/link";
 import { WavyBackground } from "./ui/wavy-background";
@@ -18,7 +18,7 @@ const brands = [
 ];
 
 // Animation Settings
-const containerVars = {
+const containerVars: Variants = {
   initial: { opacity: 0 },
   animate: {
     opacity: 1,
@@ -26,12 +26,15 @@ const containerVars = {
   },
 };
 
-const itemVars = {
+const itemVars: Variants = {
   initial: { opacity: 0, y: 25 },
   animate: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.8, ease: [0.21, 0.47, 0.32, 0.98] },
+    transition: { 
+      duration: 0.8, 
+      ease: [0.21, 0.47, 0.32, 0.98] 
+    },
   },
 };
 
