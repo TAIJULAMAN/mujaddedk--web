@@ -1,265 +1,497 @@
 "use client";
 
-import React from "react";
-import { motion, Variants } from "framer-motion";
-import { ChevronRight, Maximize2 } from "lucide-react";
+import React, { useRef, useEffect } from "react";
+import {
+  motion,
+  useMotionValue,
+  useMotionTemplate,
+  Variants,
+  useSpring,
+  useTransform,
+} from "framer-motion";
 
-const cardVariants: Variants = {
-  hidden: { opacity: 0, y: 30 },
-  visible: (i: number) => ({
+const containerVariants: Variants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants: Variants = {
+  hidden: { opacity: 0, y: 40, scale: 0.98 },
+  visible: {
     opacity: 1,
     y: 0,
+    scale: 1,
     transition: {
-      delay: i * 0.1,
-      duration: 0.6,
-      ease: [0.21, 0.47, 0.32, 0.98],
+      type: "spring",
+      stiffness: 100,
+      damping: 20,
+      mass: 0.8,
     },
-  }),
+  },
 };
+
+const features = [
+  {
+    step: "01 / INGEST",
+    title: "CrivoExtract",
+    desc: "Native extraction from DOCX, XLSX, PDF, EML, MSG, HTML, TXT, RTF, ODS. Metadata, page counts, word counts — all extracted in a single pass.",
+    badge: "NATIVE ENGINE",
+    badgeType: "teal",
+    colSpan: "col-span-12 lg:col-span-7",
+    height: "h-[480px] lg:h-[540px]",
+    mockup: <IngestMockup />,
+  },
+  {
+    step: "02 / RENDER",
+    title: "CrivoConverter",
+    desc: "DOCX, XLSX, PPTX, HTML, and email formats converted to PDF on-server via pure Python pipeline. Sub-second conversion. No external API calls.",
+    badge: "NATIVE ENGINE",
+    badgeType: "teal",
+    colSpan: "col-span-12 lg:col-span-5",
+    height: "h-[480px] lg:h-[540px]",
+    mockup: <RenderMockup />,
+  },
+  {
+    step: "03 / VIEW",
+    title: "CrivoImager",
+    desc: "PDF pages rendered to JPEG at any DPI using PyMuPDF. Supports TIFF, BMP, WebP passthrough natively.",
+    badge: "NATIVE ENGINE",
+    badgeType: "teal",
+    colSpan: "col-span-12 md:col-span-4",
+    height: "h-[460px]",
+    mockup: <ViewMockup />,
+  },
+  {
+    step: "04 / EMAIL",
+    title: "CrivoPSTExtract",
+    desc: "Parallel PST/OST/MSG extraction with thread ID linking and custodian mapping. Terabyte-scale capable.",
+    badge: "NATIVE ENGINE",
+    badgeType: "teal",
+    colSpan: "col-span-12 md:col-span-4",
+    height: "h-[460px]",
+    mockup: <EmailMockup />,
+  },
+  {
+    step: "05 / REVIEW",
+    title: "CrivoView",
+    desc: "Word, Excel, PPTX, PDF, email, image — one viewer, zero plugins. SheetJS for spreadsheets, dark mode included.",
+    badge: "NATIVE VIEWER",
+    badgeType: "teal",
+    colSpan: "col-span-12 md:col-span-4",
+    height: "h-[460px]",
+    mockup: <ReviewMockup />,
+  },
+  {
+    step: "06 / SEARCH",
+    title: "Full-Text Index",
+    desc: "Every extracted word indexed in OpenSearch. Keyword search, fuzzy matching, regular expressions, field-level filters. Saved searches with cross-workspace alerts.",
+    badge: "OPENSEARCH",
+    badgeType: "teal",
+    colSpan: "col-span-12 lg:col-span-8",
+    height: "h-[420px]",
+    mockup: <SearchMockup />,
+  },
+  {
+    step: "07 / REDACT",
+    title: "CrivoRedact 2.0",
+    desc: "Pattern-based (SSN, EIN, email) and AI-assisted redaction. Permanent burn-in via PyMuPDF with audit trail.",
+    badge: "NEW IN S40",
+    badgeType: "orange",
+    colSpan: "col-span-12 lg:col-span-4",
+    height: "h-[420px]",
+    mockup: <RedactMockup />,
+  },
+  {
+    step: "08 / PRODUCE",
+    title: "Production Engine",
+    desc: "Bates numbering, slip sheet generation, load file export (DAT/OPT/CSV). TIFF, PDF, native. Full chain-of-custody.",
+    badge: "COURT-READY",
+    badgeType: "teal",
+    colSpan: "col-span-12 lg:col-span-6",
+    height: "h-[440px]",
+    mockup: <ProduceMockup />,
+  },
+  {
+    step: "09 / FIELDS",
+    title: "Dynamic Field Registry",
+    desc: "35 pre-built review fields across 7 categories — Media, ICR, Redaction, Comments. Fields appear automatically.",
+    badge: "NEW IN S40",
+    badgeType: "orange",
+    colSpan: "col-span-12 lg:col-span-6",
+    height: "h-[440px]",
+    mockup: <FieldsMockup />,
+  },
+];
+
+function AnimatedGridBackground() {
+  return (
+    <div className="absolute inset-0 z-0 pointer-events-none overflow-hidden">
+      {/* High-tech mesh grid pattern */}
+      {/* <div className="absolute inset-0 bg-[linear-gradient(rgba(83,74,183,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(83,74,183,0.03)_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_100%_100%_at_50%_0%,white_20%,transparent_80%)]" /> */}
+
+      {/* Moving lasers */}
+      <motion.div
+        className="absolute top-0 w-[1px] h-48 bg-gradient-to-b from-transparent via-[#3478F6] to-transparent shadow-[0_0_15px_rgba(52,120,246,0.8)]"
+        style={{ left: "20%" }}
+        animate={{ top: ["-20%", "120%"] }}
+        transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+      />
+      <motion.div
+        className="absolute top-0 w-[1px] h-64 bg-gradient-to-b from-transparent via-[#534AB7] to-transparent shadow-[0_0_15px_rgba(83,74,183,0.8)]"
+        style={{ left: "50%" }}
+        animate={{ top: ["-20%", "120%"] }}
+        transition={{
+          duration: 11,
+          repeat: Infinity,
+          ease: "linear",
+          delay: 3,
+        }}
+      />
+      <motion.div
+        className="absolute top-0 w-[1px] h-32 bg-gradient-to-b from-transparent via-[#FF5DB1] to-transparent shadow-[0_0_15px_rgba(255,93,177,0.8)]"
+        style={{ left: "80%" }}
+        animate={{ top: ["-20%", "120%"] }}
+        transition={{ duration: 5, repeat: Infinity, ease: "linear", delay: 1 }}
+      />
+
+      {/* Floating ethereal orbs */}
+      <motion.div
+        className="absolute top-[10%] left-[5%] w-[400px] h-[400px] bg-[#3478F6]/10 rounded-full blur-[120px]"
+        animate={{
+          x: [0, 50, 0],
+          y: [0, -50, 0],
+          scale: [1, 1.1, 1],
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+      />
+      <motion.div
+        className="absolute bottom-[20%] right-[5%] w-[500px] h-[500px] bg-[#534AB7]/10 rounded-full blur-[140px]"
+        animate={{
+          x: [0, -70, 0],
+          y: [0, 50, 0],
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "easeInOut",
+          delay: 2,
+        }}
+      />
+    </div>
+  );
+}
 
 export default function StripeProducts() {
   return (
-    <section className="relative bg-[#f6f9fc] py-32 overflow-hidden">
-      <div className="max-w-[1400px] mx-auto px-8">
+    <section id="solutions" className="relative py-24 md:py-32 overflow-hidden">
+      <AnimatedGridBackground />
+      <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
         {/* Section Header */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="max-w-[800px] mb-16"
+          className="max-w-[800px] mb-16 relative"
         >
-          <h2 className="text-[18px] font-semibold text-stripe-slate mb-4">
-            Flexible solutions for every business model.{" "}
-            <span className="text-stripe-slate/60 font-medium">
-              Grow your business with a comprehensive set of payments and
-              financial tools—designed to work individually or together.
-            </span>
+          {/* Header glowing accent line */}
+          <div className="absolute -left-6 md:-left-8 top-0 bottom-0 w-1 bg-gradient-to-b from-[#3478F6] to-transparent rounded-r-sm hidden sm:block" />
+
+          <h4 className="text-[12px] font-[800] text-[#534AB7] tracking-[0.15em] uppercase mb-4 flex items-center gap-3">
+            <span className="w-2 h-2 rounded-full bg-[#FF5DB1] animate-pulse shadow-[0_0_8px_#FF5DB1]" />
+            Platform Features
+          </h4>
+          <h2 className="text-[28px] md:text-[36px] font-[800] text-[#080E23] leading-tight mb-4 tracking-tight">
+            Everything you need. Nothing you don't.
           </h2>
+          <p className="text-[16px] md:text-[18px] text-slate-500 font-medium leading-relaxed">
+            From ingestion to production, every step runs on native Crivo
+            engines — no licensing fees, no cloud dependencies, no surprises.
+          </p>
         </motion.div>
 
-        {/* Product Cards Grid */}
-        <div className="grid grid-cols-12 gap-6">
-          {/* Row 1: 2 Cards */}
-          <div className="col-span-12 lg:col-span-7">
-            <ProductCard
-              title="Accept and optimize payments globally—online and in person"
-              className="h-[480px]"
-              index={0}
-            >
-              <PaymentsMockup />
-            </ProductCard>
-          </div>
-          <div className="col-span-12 lg:col-span-5">
-            <ProductCard
-              title="Enable any billing model"
-              className="h-[480px]"
-              index={1}
-            >
-              <BillingMockup />
-            </ProductCard>
-          </div>
-
-          {/* Row 2: 3 Cards */}
-          <div className="col-span-12 md:col-span-4">
-            <ProductCard
-              title="Monetize through agentic commerce"
-              className="h-[460px]"
-              index={2}
-            >
-              <AgenticMockup />
-            </ProductCard>
-          </div>
-          <div className="col-span-12 md:col-span-4">
-            <ProductCard
-              title="Create a card issuing program"
-              className="h-[460px]"
-              index={3}
-            >
-              <IssuingMockup />
-            </ProductCard>
-          </div>
-          <div className="col-span-12 md:col-span-4">
-            <ProductCard
-              title="Access borderless money movement with stablecoins and crypto"
-              className="h-[460px]"
-              index={4}
-            >
-              <CryptoMockup />
-            </ProductCard>
-          </div>
-
-          {/* Row 3: 1 Wide Card */}
-          <div className="col-span-12">
-            <ProductCard
-              title="Embed payments in your platform"
-              className="h-[400px]"
-              index={5}
-              isWide
-            >
-              <PlatformMockup />
-            </ProductCard>
-          </div>
-        </div>
+        {/* Features Grid */}
+        <motion.div
+          variants={containerVariants}
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true, margin: "-50px" }}
+          className="grid grid-cols-12 gap-6 relative"
+        >
+          {features.map((feature, i) => (
+            <FeatureCard key={i} feature={feature} index={i} />
+          ))}
+        </motion.div>
       </div>
     </section>
   );
 }
 
-function ProductCard({
-  title,
-  children,
-  className = "",
-  index,
-  isWide = false,
-}: {
-  title: string;
-  children?: React.ReactNode;
-  className?: string;
-  index: number;
-  isWide?: boolean;
-}) {
+function FeatureCard({ feature, index }: { feature: any; index: number }) {
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  // Spring physics for smooth 3D parallax
+  const springX = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const springY = useSpring(mouseY, { stiffness: 150, damping: 20 });
+
+  const rotateX = useTransform(springY, [0, 600], [5, -5]);
+  const rotateY = useTransform(springX, [0, 800], [-5, 5]);
+
+  function handleMouseMove({
+    currentTarget,
+    clientX,
+    clientY,
+  }: React.MouseEvent) {
+    const { left, top } = currentTarget.getBoundingClientRect();
+    mouseX.set(clientX - left);
+    mouseY.set(clientY - top);
+  }
+
+  function handleMouseLeave() {
+    mouseX.set(300); // Default to center-ish resting value
+    mouseY.set(300);
+  }
+
   return (
     <motion.div
-      custom={index}
-      variants={cardVariants}
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, margin: "-100px" }}
-      className={`group relative rounded-2xl bg-white border border-slate-100 shadow-sm overflow-hidden flex flex-col ${className}`}
+      variants={itemVariants}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{ perspective: 1500 }}
+      className={`group relative bg-white border border-slate-100 shadow-sm rounded-3xl overflow-hidden flex flex-col z-10 ${feature.colSpan} ${feature.height}`}
     >
-      <div className="p-8 pb-4 relative z-10">
+      {/* Background Hover Spotlight */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-500 group-hover:opacity-100 z-10"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              700px circle at ${mouseX}px ${mouseY}px,
+              rgba(83, 74, 183, 0.06),
+              transparent 80%
+            )
+          `,
+        }}
+      />
+
+      {/* Animated Gradient Border Layer */}
+      <motion.div
+        className="pointer-events-none absolute -inset-px rounded-3xl opacity-0 transition duration-500 group-hover:opacity-100 z-0"
+        style={{
+          background: useMotionTemplate`
+            radial-gradient(
+              250px circle at ${mouseX}px ${mouseY}px,
+              rgba(52, 120, 246, 0.4),
+              transparent 80%
+            )
+          `,
+          WebkitMask: `linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0)`,
+          WebkitMaskComposite: `xor`,
+          maskComposite: `exclude`,
+          padding: `1px`,
+        }}
+      />
+
+      {/* Text Content */}
+      <div className="relative z-20 p-8 lg:p-10 pointer-events-none pb-0">
         <div className="flex justify-between items-start mb-4">
-          <h3 className="text-[18px] font-bold text-stripe-dark leading-tight max-w-[200px]">
-            {title}
-          </h3>
-          <div className="w-6 h-6 rounded-md bg-slate-50 flex items-center justify-center text-slate-300 transition-colors group-hover:bg-stripe-purple group-hover:text-white">
-            <Maximize2 size={12} />
+          <div>
+            <span className="text-[10px] font-[800] text-[#3478F6] tracking-[0.1em] uppercase mb-3 block">
+              {feature.step}
+            </span>
+            <h3 className="text-[20px] font-[800] text-[#080E23] leading-tight mb-2 max-w-[300px]">
+              {feature.title}
+            </h3>
           </div>
+          <span
+            className={`px-2.5 py-1 text-[9px] font-[800] rounded uppercase tracking-wider whitespace-nowrap mt-1 ${
+              feature.badgeType === "teal"
+                ? "bg-[#E6F6EC] text-[#0C8052] shadow-[0_0_10px_rgba(12,128,82,0.1)]"
+                : "bg-[#FFF3E0] text-[#E67B00] shadow-[0_0_10px_rgba(230,123,0,0.1)]"
+            }`}
+          >
+            {feature.badge}
+          </span>
         </div>
+        <p className="text-[13px] text-slate-500 font-medium leading-relaxed max-w-[400px]">
+          {feature.desc}
+        </p>
       </div>
-      <div className="flex-1 relative overflow-hidden">{children}</div>
+
+      {/* Mockup Area (Parallaxed) */}
+      <motion.div
+        style={{ rotateX, rotateY }}
+        className="relative flex-1 mt-6 overflow-hidden pointer-events-none transform-gpu"
+      >
+        {/* Glossy 3D glare effect */}
+        <motion.div
+          className="absolute inset-0 z-50 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity duration-700 blur-[20px]"
+          style={{
+            background: useMotionTemplate`
+                radial-gradient(
+                  circle at ${mouseX}px ${mouseY}px,
+                  rgba(255, 255, 255, 0.6) 0%,
+                  rgba(255, 255, 255, 0) 40%
+                )
+             `,
+            mixBlendMode: "overlay",
+          }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-white/30 to-transparent z-40" />
+        {feature.mockup}
+      </motion.div>
     </motion.div>
   );
 }
 
-// --- Mockup Components ---
+// CUSTOM MOCKUP COMPONENTS
 
-function PaymentsMockup() {
+function IngestMockup() {
   return (
-    <div className="absolute inset-x-8 bottom-0 h-full flex items-end justify-center pointer-events-none">
-      <div className="relative w-full h-[85%] bg-gradient-to-tr from-[#635bff] to-[#80e9ff] rounded-t-2xl p-6 flex gap-4 shadow-2xl">
-        {/* iPhone Mockup (Roastery) */}
-        <div className="w-[180px] h-[320px] bg-white rounded-[2.5rem] border-8 border-slate-900 shadow-2xl relative overflow-hidden shrink-0 mt-8">
-          <div className="p-4 pt-8">
-            <div className="flex items-center gap-2 mb-4">
-              <div className="w-6 h-6 rounded-full bg-slate-100 flex items-center justify-center">
-                 <div className="w-3 h-3 border border-slate-300 rounded-sm" />
-              </div>
-              <div>
-                <p className="text-[10px] text-slate-400 font-medium">Pay Roastery</p>
-                <div className="w-12 h-1 bg-slate-100 rounded" />
-              </div>
-            </div>
-            <p className="text-[24px] font-[800] text-stripe-dark tracking-tight mb-4">
-              $5.46
-            </p>
-            <div className="space-y-2 border-t border-slate-50 pt-3">
-              {[
-                { label: "Mocha Latte", price: "$5.50" },
-                { label: "Loyalty (10% off)", price: "-$0.55", color: "text-green-500" },
-                { label: "Tax", price: "$0.51" },
-              ].map((item) => (
-                <div key={item.label} className="flex justify-between items-center text-[9px]">
-                  <span className="text-slate-400">{item.label}</span>
-                  <span className={`font-bold ${item.color || "text-stripe-dark"}`}>{item.price}</span>
+    <div className="absolute inset-x-8 bottom-0 h-[85%] flex items-end justify-center">
+      <div className="w-full h-full bg-gradient-to-tr from-[#534AB7] via-[#3478F6] to-[#80e9ff] rounded-t-3xl p-6 flex gap-8 shadow-[0_-10px_40px_rgba(83,74,183,0.2)] relative overflow-hidden">
+        {/* Advanced Grid */}
+        <div className="absolute inset-0 opacity-[0.15] bg-[linear-gradient(rgba(255,255,255,0.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.5)_1px,transparent_1px)] bg-[size:16px_16px] [mask-image:radial-gradient(ellipse_at_center,black_50%,transparent_100%)]" />
+
+        {/* Glowing Orb */}
+        <motion.div
+          animate={{ rotate: 360, scale: [1, 1.2, 1] }}
+          transition={{ duration: 15, repeat: Infinity, ease: "linear" }}
+          className="absolute top-1/4 left-1/2 w-64 h-64 bg-[#FF5DB1]/30 blur-[60px] rounded-full pointer-events-none mix-blend-screen"
+        />
+
+        {/* File Queue Side with connected SVG lines */}
+        <div className="w-[180px] h-full flex flex-col justify-end gap-4 pb-8 relative z-20">
+          {[
+            { tag: "PDF", name: "Contract_v2.pdf", color: "bg-red-500" },
+            {
+              tag: "DOCX",
+              name: "Settlement_Agreement.docx",
+              color: "bg-blue-500",
+            },
+            { tag: "EML", name: "Re_Important.eml", color: "bg-orange-500" },
+          ].map((f, i) => (
+            <div key={i} className="relative group">
+              {/* Laser line to dashboard */}
+              <motion.svg
+                className="absolute left-[180px] top-4 w-24 h-[120px] overflow-visible z-0 -ml-2"
+                style={{ pointerEvents: "none" }}
+              >
+                <motion.path
+                  d={`M 0 0 C 40 0, 40 ${120 - i * 60}, 90 ${120 - i * 60}`}
+                  fill="none"
+                  stroke="rgba(255,255,255,0.3)"
+                  strokeWidth="2"
+                />
+                <motion.path
+                  d={`M 0 0 C 40 0, 40 ${120 - i * 60}, 90 ${120 - i * 60}`}
+                  fill="none"
+                  stroke="#fff"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0, opacity: 0 }}
+                  animate={{ pathLength: [0, 1, 0], opacity: [0, 1, 0] }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    delay: i * 0.4,
+                    ease: "linear",
+                  }}
+                />
+              </motion.svg>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ delay: i * 0.15, duration: 0.6 }}
+                className="bg-white/95 backdrop-blur-xl p-3 rounded-xl shadow-2xl border border-white/60 flex items-center gap-3 relative z-10"
+              >
+                <div
+                  className={`w-8 h-8 rounded-lg flex items-center justify-center text-[9px] font-bold text-white shadow-inner ${f.color}`}
+                >
+                  {f.tag}
                 </div>
-              ))}
-              <div className="flex justify-between items-center text-[10px] font-bold pt-1 border-t border-slate-50">
-                <span>Total</span>
-                <span>$5.46</span>
-              </div>
+                <div className="flex-1 overflow-hidden">
+                  <p className="text-[10px] font-bold text-[#080E23] truncate">
+                    {f.name}
+                  </p>
+                  <motion.div className="h-1 bg-slate-100 rounded mt-1 overflow-hidden">
+                    <motion.div
+                      initial={{ width: "0%" }}
+                      animate={{ width: "100%" }}
+                      transition={{
+                        duration: 1.5,
+                        delay: i * 0.2,
+                        repeat: Infinity,
+                        ease: "easeInOut",
+                      }}
+                      className={`h-full ${f.color}`}
+                    />
+                  </motion.div>
+                </div>
+              </motion.div>
             </div>
-            <button className="w-full mt-6 py-2 bg-[#ffba43] rounded-lg text-white text-[10px] font-bold">
-               Continue
-            </button>
-          </div>
+          ))}
         </div>
 
-        {/* Laptop/Dashboard Preview (Roastery Checkout) */}
-        <div className="flex-1 h-[280px] bg-white rounded-xl shadow-2xl border border-slate-100 overflow-hidden mt-12 flex flex-col">
-          <div className="h-10 border-b border-slate-50 px-4 flex items-center justify-between bg-white relative">
-            <div className="flex gap-1.5">
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
+        {/* Dashboard Extraction Side */}
+        <div className="flex-1 bg-white/95 backdrop-blur-2xl rounded-t-2xl shadow-[0_-5px_30px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col border border-white/50 relative z-20 mt-12 bg-opacity-95">
+          <div className="h-10 bg-slate-50/50 backdrop-blur-md border-b border-white flex items-center px-4 gap-2">
+            <div className="flex gap-1.5 mr-4">
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
+              <div className="w-2.5 h-2.5 rounded-full bg-slate-300" />
             </div>
-            <div className="absolute left-1/2 -translate-x-1/2 w-48 h-6 bg-slate-50 rounded-full flex items-center px-3 gap-2">
-                 <div className="w-2 h-2 bg-slate-200 rounded-full" />
-                 <span className="text-[9px] text-slate-400">roastery.com/checkout</span>
+            <div className="px-3 py-1 bg-white shadow-sm border border-slate-100 rounded-md text-[9px] font-bold text-slate-500 flex items-center gap-2">
+              <motion.div
+                animate={{ opacity: [1, 0, 1] }}
+                transition={{ repeat: Infinity, duration: 1.5 }}
+                className="w-1.5 h-1.5 bg-green-500 rounded-full"
+              />
+              Extractor Thread 1
+            </div>
+            <div className="px-3 py-1 bg-white shadow-sm border border-slate-100 rounded-md text-[9px] font-bold text-slate-500">
+              Extractor Thread 2
             </div>
           </div>
-          <div className="flex-1 flex">
-            {/* Form Side */}
-            <div className="flex-1 p-6 border-r border-slate-50">
-              <p className="text-[12px] font-bold text-stripe-dark mb-4">ROASTERY.</p>
-              <div className="space-y-4">
-                <div>
-                   <label className="text-[9px] text-slate-400 font-medium block mb-1">Email</label>
-                   <div className="px-3 py-2 border border-slate-100 rounded-md text-[10px] text-stripe-dark">jane.diaz@stripe.com</div>
+          <div className="flex-1 p-6 relative overflow-hidden bg-white/50">
+            {/* Advanced Extracting Text Animation */}
+            <motion.div
+              animate={{ y: [0, -100] }}
+              transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
+              className="space-y-4"
+            >
+              {Array.from({ length: 8 }).map((_, i) => (
+                <div key={i} className="flex gap-4 items-center group">
+                  <span className="text-[10px] font-mono text-slate-400 w-8">
+                    L{104 + i}
+                  </span>
+                  <div className="flex-1 flex gap-2">
+                    <motion.div
+                      initial={{ opacity: 0.3 }}
+                      animate={{ opacity: [0.3, 1, 0.3] }}
+                      transition={{
+                        repeat: Infinity,
+                        duration: 2,
+                        delay: i * 0.1,
+                      }}
+                      className="h-2.5 bg-gradient-to-r from-[#534AB7]/20 to-transparent rounded w-16"
+                    />
+                    <div
+                      className={`h-2.5 bg-slate-200 rounded w-[${60 + (i % 3) * 10}%]`}
+                    />
+                  </div>
                 </div>
-                <div className="flex gap-2">
-                   <button className="flex-1 py-1.5 bg-[#00d4aa] rounded border border-[#00d4aa] flex items-center justify-center text-white text-[10px] font-bold">Link</button>
-                   <button className="flex-1 py-1.5 bg-black rounded flex items-center justify-center text-white text-[10px] font-bold">Pay</button>
-                </div>
-                <div className="space-y-2">
-                   {[
-                     { label: "Card", active: true },
-                     { label: "Affirm", sub: "Pay now or in 4 interest-free payments" },
-                     { label: "Cash App" },
-                     { label: "Crypto" },
-                   ].map((method) => (
-                     <div key={method.label} className={`p-2 border rounded-md flex items-center gap-2 ${method.active ? "border-stripe-purple bg-stripe-purple/[0.02]" : "border-slate-50"}`}>
-                        <div className={`w-3 h-3 rounded-full border ${method.active ? "border-stripe-purple border-4" : "border-slate-200"}`} />
-                        <div>
-                          <p className="text-[9px] font-bold text-stripe-dark">{method.label}</p>
-                          {method.sub && <p className="text-[7px] text-slate-400">{method.sub}</p>}
-                        </div>
-                     </div>
-                   ))}
-                </div>
-              </div>
-            </div>
-            {/* Summary Side */}
-            <div className="w-[180px] p-6 bg-slate-50/50">
-               <p className="text-[10px] font-bold text-stripe-dark mb-6">Order summary</p>
-               <div className="flex gap-3 mb-6">
-                  <div className="w-12 h-12 bg-white rounded-lg border border-slate-100 flex items-center justify-center overflow-hidden">
-                     <div className="w-8 h-8 rounded bg-slate-800 flex flex-col items-center justify-center">
-                        <div className="w-4 h-0.5 bg-slate-400 rounded-full mb-1" />
-                        <div className="w-6 h-4 bg-slate-400 rounded-t-lg" />
-                     </div>
-                  </div>
-                  <div>
-                    <p className="text-[9px] font-bold text-stripe-dark leading-tight">Electric Kettle with Temperature Control</p>
-                    <p className="text-[9px] font-bold text-stripe-dark mt-1">$150.00</p>
-                  </div>
-               </div>
-               <div className="space-y-2 border-t border-slate-100 pt-4 text-[9px]">
-                  <div className="flex justify-between">
-                     <span className="text-slate-400">Subtotal</span>
-                     <span className="text-stripe-dark">$150.00</span>
-                  </div>
-                  <div className="flex justify-between">
-                     <span className="text-slate-400">Tax</span>
-                     <span className="text-stripe-dark">$15.00</span>
-                  </div>
-                  <div className="flex justify-between font-bold pt-2">
-                     <span className="text-stripe-dark">Total</span>
-                     <span className="text-stripe-dark">$165.00</span>
-                  </div>
-               </div>
-            </div>
+              ))}
+            </motion.div>
+            {/* Overlays */}
+            <div className="absolute inset-0 bg-gradient-to-b from-white/80 via-transparent to-white/90 pointer-events-none" />
           </div>
         </div>
       </div>
@@ -267,54 +499,394 @@ function PaymentsMockup() {
   );
 }
 
-function BillingMockup() {
+function RenderMockup() {
   return (
-    <div className="absolute inset-x-8 bottom-0 h-full flex items-end justify-center">
-      <div className="w-full h-[85%] flex flex-col gap-4">
-        {/* Top Card: Pro Plan */}
-        <div className="bg-white rounded-2xl shadow-xl border border-slate-100 p-6">
-          <div className="flex items-center justify-between mb-8">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-[#ad6bff]/10 flex items-center justify-center text-[#ad6bff]">
-                <Maximize2 size={20} />
-              </div>
-              <div>
-                <p className="text-[14px] font-[800] text-stripe-dark">Pro Plan</p>
-                <p className="text-[11px] text-slate-400">Billed monthly</p>
-              </div>
-            </div>
-            <div className="px-3 py-1 bg-slate-50 rounded-full text-[10px] font-bold text-slate-400">
-              Current
-            </div>
-          </div>
+    <div className="absolute inset-x-8 bottom-0 h-[85%] rounded-t-3xl bg-[#080E23] overflow-hidden p-8 flex flex-col shadow-[0_20px_50px_rgba(0,0,0,0.5)] border-t border-x border-[#3478F6]/30 group">
+      {/* Ambient glow */}
+      <div className="absolute top-0 right-0 w-64 h-64 bg-[#3478F6]/20 blur-[80px] rounded-full pointer-events-none z-0" />
 
-          <div className="mb-4">
-            <p className="text-[11px] text-slate-400 font-medium mb-1 uppercase tracking-wider">Tokens</p>
-            <p className="text-[12px] font-bold text-stripe-dark">$0.01 per 1,000 units</p>
-            <div className="mt-4 flex items-center gap-2">
-               <Maximize2 size={12} className="text-slate-300" />
-               <p className="text-[10px] font-bold text-stripe-dark">Usage meter</p>
-            </div>
-            <div className="w-full h-2 bg-slate-100 rounded-full mt-2 overflow-hidden">
-              <div className="w-[65%] h-full bg-gradient-to-r from-[#635bff] to-[#ad6bff]" />
+      {/* Top UI */}
+      <div className="flex justify-between items-center mb-6 relative z-10 w-full">
+        <div className="flex items-center gap-3">
+          <div className="w-8 h-8 rounded-lg bg-gradient-to-b from-[#534AB7] to-[#3478F6] flex items-center justify-center text-white font-mono text-[10px] font-bold shadow-[0_0_15px_rgba(83,74,183,0.5)]">
+            PY
+          </div>
+          <div>
+            <p className="text-[12px] text-white font-bold tracking-wider">
+              CrivoConverter
+            </p>
+            <div className="flex items-center gap-1">
+              <div className="h-1 w-12 bg-[#3478F6]/30 overflow-hidden rounded">
+                <motion.div
+                  animate={{ width: ["0%", "100%"] }}
+                  transition={{ duration: 1, repeat: Infinity }}
+                  className="h-full bg-[#3478F6]"
+                />
+              </div>
+              <p className="text-[8px] text-[#A5B4FC] uppercase tracking-widest">
+                Sub-second
+              </p>
             </div>
           </div>
         </div>
+        <div className="px-3 py-1 bg-green-500/10 text-green-400 text-[9px] font-bold uppercase tracking-widest border border-green-500/30 rounded shadow-[0_0_10px_rgba(34,197,94,0.2)]">
+          Running
+        </div>
+      </div>
 
-        {/* Bottom Card: Statistics */}
-        <div className="flex-1 bg-white rounded-t-2xl shadow-2xl border border-slate-100 p-6 flex flex-col">
-          <p className="text-[11px] text-slate-400 font-bold mb-1">Tokens used in the last 30 days</p>
-          <p className="text-[22px] font-[800] text-stripe-dark tracking-tighter mb-6">
-            2,010,569,010
+      {/* Fast Terminal UI */}
+      <div className="flex-1 bg-black/60 backdrop-blur-xl border border-white/5 rounded-xl p-5 font-mono text-[10px] sm:text-[11px] overflow-hidden relative z-10 shadow-inner">
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          className="text-green-400 space-y-2.5 opacity-90"
+        >
+          <p className="text-slate-400 flex">
+            <span className="text-[#3478F6] mr-2">❯</span> ./convert_batch
+            --workers=16 --optimize
           </p>
-          <div className="flex-1 flex items-end justify-between gap-1 mt-auto">
-            {[20, 35, 25, 60, 40, 75, 50, 65, 45, 85, 55, 30, 40, 60, 95, 70, 40, 30].map((h, i) => (
+          <p className="text-white/70">[INFO] Pipeline initialized in 0.002s</p>
+          <motion.div className="flex flex-col gap-1">
+            {[
+              "Processing DOCX",
+              "Processing XLSX",
+              "Processing PPTX",
+              "Processing EML",
+            ].map((txt, i) => (
               <motion.div
                 key={i}
-                initial={{ height: 0 }}
-                animate={{ height: `${h}%` }}
-                className="w-full bg-[#635bff] rounded-t-sm"
+                initial={{ opacity: 0, x: -10 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ repeat: Infinity, duration: 4, delay: i * 0.2 }}
+                className="text-[#80e9ff] flex justify-between pr-4"
+              >
+                <span>{txt} ...</span>
+                <span className="text-[#3478F6]">
+                  {(Math.random() * 5).toFixed(1)}ms
+                </span>
+              </motion.div>
+            ))}
+          </motion.div>
+          <motion.p
+            animate={{ opacity: [1, 0, 1] }}
+            transition={{ repeat: Infinity, duration: 0.8 }}
+            className="text-[#FF5DB1]"
+          >
+            _
+          </motion.p>
+        </motion.div>
+        {/* Intense Scanline */}
+        <motion.div
+          animate={{ top: ["-20%", "120%"] }}
+          transition={{ duration: 1.5, repeat: Infinity, ease: "linear" }}
+          className="absolute left-0 right-0 h-24 bg-gradient-to-b from-transparent via-[#3478F6]/20 to-transparent pointer-events-none mix-blend-screen"
+        />
+      </div>
+    </div>
+  );
+}
+
+function ViewMockup() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+      {/* Dynamic colorful blobs */}
+      <motion.div
+        animate={{ rotate: 360 }}
+        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute top-1/2 left-1/2 -ml-32 -mt-32 w-64 h-64 bg-gradient-to-r from-[#3478F6]/30 to-[#FF5DB1]/30 rounded-full blur-[80px] pointer-events-none mix-blend-multiply"
+      />
+      <div style={{ perspective: 1200 }} className="relative mt-16 group">
+        {/* Stack of documents */}
+        {[1, 2, 3].map((i) => (
+          <motion.div
+            key={i}
+            animate={{
+              rotateY: [-10, 10, -10],
+              rotateX: [10, -10, 10],
+              y: [-10 + i * 5, 10 + i * 5, -10 + i * 5],
+              z: [0 + i * -40, 20 + i * -40, 0 + i * -40],
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: i * 0.5,
+            }}
+            style={{ zIndex: 10 - i }}
+            className={`absolute inset-0 w-[200px] h-[280px] rounded-2xl bg-white/95 backdrop-blur-md p-5 flex flex-col transform-gpu border border-white shadow-[0_20px_40px_rgba(0,0,0,0.1)]`}
+          >
+            <div className="w-full h-28 bg-[#f8f9fa] rounded-lg mb-4 overflow-hidden relative border border-slate-100 flex items-center justify-center">
+              <div className="absolute inset-0 bg-gradient-to-br from-[#EEEDFE] to-white" />
+              <motion.svg
+                className="relative w-12 h-12 opacity-80"
+                viewBox="0 0 100 100"
+              >
+                <motion.path
+                  d="M20 80 Q 50 20 80 80"
+                  fill="none"
+                  stroke="url(#blue-grad)"
+                  strokeWidth="6"
+                  strokeLinecap="round"
+                  initial={{ pathLength: 0 }}
+                  animate={{ pathLength: 1 }}
+                  transition={{
+                    duration: 2,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
+                <defs>
+                  <linearGradient
+                    id="blue-grad"
+                    x1="0%"
+                    y1="0%"
+                    x2="100%"
+                    y2="0%"
+                  >
+                    <stop offset="0%" stopColor="#3478F6" />
+                    <stop offset="100%" stopColor="#534AB7" />
+                  </linearGradient>
+                </defs>
+              </motion.svg>
+            </div>
+            <div className="flex-1 space-y-2">
+              <div className="h-2 w-3/4 bg-slate-200 rounded-full" />
+              <div className="h-2 w-full bg-slate-200 rounded-full" />
+              <div className="h-2 w-5/6 bg-slate-200 rounded-full" />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function EmailMockup() {
+  const nodes = Array.from({ length: 20 }).map(() => ({
+    x: 10 + Math.random() * 80,
+    y: 10 + Math.random() * 80,
+    size: 2 + Math.random() * 5,
+  }));
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-transparent mt-12 overflow-hidden">
+      {/* Background ambient lighting */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(83,74,183,0.15)_0%,transparent_100%)] pointer-events-none" />
+
+      <svg
+        viewBox="0 0 100 100"
+        className="w-[120%] h-[120%] p-4 origin-center"
+      >
+        {/* Animated Connecting Lines */}
+        {nodes.map(
+          (n, i) =>
+            i > 0 && (
+              <motion.line
+                key={`line-${i}`}
+                x1={nodes[i - 1].x}
+                y1={nodes[i - 1].y}
+                x2={n.x}
+                y2={n.y}
+                stroke="url(#lineGrad)"
+                strokeWidth="0.4"
+                strokeOpacity="0.8"
+                initial={{ pathLength: 0, opacity: 0 }}
+                animate={{ pathLength: 1, opacity: [0.2, 0.8, 0.2] }}
+                transition={{ duration: 3, delay: i * 0.1, repeat: Infinity }}
               />
+            ),
+        )}
+        {/* Pulsing Nodes */}
+        {nodes.map((n, i) => (
+          <motion.circle
+            key={`node-${i}`}
+            cx={n.x}
+            cy={n.y}
+            r={n.size}
+            fill={i % 4 === 0 ? "#FF5DB1" : i % 2 === 0 ? "#3478F6" : "#80e9ff"}
+            initial={{ scale: 0 }}
+            animate={{ scale: [1, 1.4, 1] }}
+            transition={{
+              duration: 1.5 + Math.random(),
+              delay: i * 0.1,
+              repeat: Infinity,
+            }}
+            className="filter mix-blend-multiply"
+          />
+        ))}
+        <defs>
+          <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%" stopColor="#3478F6" />
+            <stop offset="100%" stopColor="#FF5DB1" />
+          </linearGradient>
+        </defs>
+      </svg>
+
+      <motion.div
+        initial={{ y: 20, opacity: 0 }}
+        whileInView={{ y: 0, opacity: 1 }}
+        className="absolute bottom-8 left-8 bg-white/95 backdrop-blur-xl px-4 py-3 rounded-xl shadow-2xl border border-white/60 flex items-center gap-3 z-10"
+      >
+        <div className="w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+        <p className="text-[10px] font-bold text-[#080E23] tracking-wider uppercase">
+          Parallel Thread mapping...
+        </p>
+      </motion.div>
+    </div>
+  );
+}
+
+function ReviewMockup() {
+  return (
+    <div className="absolute inset-x-6 bottom-0 h-[240px] bg-[#1a1b1e] rounded-t-2xl rounded-b-none shadow-[0_-15px_40px_rgba(0,0,0,0.5)] p-4 overflow-hidden border-t border-x border-[#3478F6]/20">
+      <div className="flex gap-4 h-full relative">
+        {/* Glass Sidebar */}
+        <div className="w-24 border-r border-[#2b2d31]/50 pr-4 space-y-3 relative z-10">
+          <div className="w-full flex justify-between gap-1 mb-4">
+            <div className="w-2.5 h-2.5 rounded-full bg-[#FF5F56]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#FFBD2E]" />
+            <div className="w-2.5 h-2.5 rounded-full bg-[#27C93F]" />
+          </div>
+          <div className="h-1.5 bg-[#2b2d31] rounded w-full" />
+          <div className="h-1.5 bg-[#2b2d31] rounded w-3/4" />
+          <motion.div
+            animate={{ opacity: [0.5, 1, 0.5] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+            className="h-1.5 bg-[#534AB7] rounded w-full shadow-[0_0_8px_rgba(83,74,183,0.8)]"
+          />
+          <div className="h-1.5 bg-[#2b2d31] rounded w-5/6" />
+        </div>
+        {/* Main Viewer Area */}
+        <div className="flex-1 bg-[#202124] rounded-xl p-5 border border-[#3c4043] relative shadow-inner overflow-hidden">
+          {/* Dynamic Document Content */}
+          <div className="space-y-4">
+            <div className="flex gap-3 items-center">
+              <div className="w-8 h-8 rounded-lg bg-[#3c4043] flex items-center justify-center">
+                <div className="w-4 h-4 rounded bg-[#534AB7]" />
+              </div>
+              <div className="flex-1 space-y-1.5">
+                <div className="h-2.5 bg-[#e8eaed] rounded w-1/3" />
+                <div className="h-2 bg-[#9aa0a6] rounded w-1/4" />
+              </div>
+            </div>
+            <div className="space-y-2 pt-2 relative z-10">
+              <div className="h-1.5 bg-[#5f6368] rounded w-full" />
+              <div className="h-1.5 bg-[#5f6368] rounded w-[90%]" />
+              <div className="h-1.5 bg-[#5f6368] rounded w-3/4" />
+            </div>
+          </div>
+          {/* Glowing Highlight Overlay */}
+          <motion.div
+            initial={{ left: "-100%" }}
+            whileInView={{ left: "16px" }}
+            transition={{ duration: 1.5, ease: "easeOut" }}
+            className="absolute top-[82px] h-4 bg-[#FFED86]/40 rounded-sm w-[60%] flex items-center overflow-hidden border border-[#FFED86]/50"
+          >
+            <div className="w-full h-full bg-gradient-to-r from-transparent via-white/50 to-transparent animate-[shimmer_1s_infinite_linear]" />
+          </motion.div>
+          {/* AI summary dialog popping up */}
+          <motion.div
+            initial={{ opacity: 0, y: 20, scale: 0.9 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ delay: 1 }}
+            className="absolute bottom-4 right-4 bg-[#3478F6] p-3 rounded-xl shadow-[0_10px_20px_rgba(52,120,246,0.3)] w-48 border border-[#80e9ff]/30 text-white"
+          >
+            <p className="text-[9px] font-bold flex justify-between">
+              AI Summary <span className="bg-white/20 px-1 rounded">NEW</span>
+            </p>
+            <p className="text-[8px] opacity-80 mt-1 leading-snug">
+              Contract obligates party to terms by Q4.
+            </p>
+          </motion.div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function SearchMockup() {
+  return (
+    <div className="absolute inset-0 flex items-center justify-center bg-transparent mt-12 overflow-hidden">
+      {/* Background gradient flares */}
+      <div className="absolute right-0 top-0 w-[400px] h-[400px] bg-gradient-to-tr from-[#3478F6]/5 to-[#534AB7]/10 rounded-full blur-[100px] -z-10" />
+
+      <div className="w-[85%] max-w-[550px] flex flex-col items-center">
+        {/* Advanced Search Bar */}
+        <motion.div
+          initial={{ scale: 0.9, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 1 }}
+          className="w-full h-16 bg-white rounded-2xl shadow-[0_20px_60px_rgba(83,74,183,0.15)] border-2 border-transparent transition-all overflow-hidden flex items-center px-6 relative z-30"
+        >
+          {/* Animated Border gradient */}
+          <div className="absolute inset-0 bg-gradient-to-r from-[#534AB7] via-[#3478F6] to-[#534AB7] opacity-20 pointer-events-none rounded-2xl p-[2px]">
+            <div className="w-full h-full bg-white rounded-[14px]" />
+          </div>
+
+          <div className="w-5 h-5 rounded-full border-[2.5px] border-[#534AB7] mr-4 relative z-10">
+            <div className="absolute top-3.5 left-3.5 w-2.5 h-0.5 bg-[#534AB7] rotate-45 transform origin-left" />
+          </div>
+
+          {/* Typing effect */}
+          <motion.span
+            initial={{ clipPath: "polygon(0 0, 0 100%, 0 100%, 0 0)" }}
+            whileInView={{
+              clipPath: "polygon(0 0, 0 100%, 100% 100%, 100% 0)",
+            }}
+            transition={{ duration: 1.5, ease: "linear" }}
+            className="text-[13px] md:text-[15px] font-mono text-[#0A2540] whitespace-nowrap z-10"
+          >
+            content:(fraud OR "wire transfer")
+          </motion.span>
+
+          <div className="ml-auto flex items-center gap-2 z-10 pl-4 bg-gradient-to-l from-white to-transparent">
+            <div className="px-2.5 py-1 bg-slate-100 rounded-md text-[9px] font-bold text-slate-500 shadow-sm border border-slate-200">
+              REGEX
+            </div>
+            <div className="px-2.5 py-1 bg-[#EEEDFE] rounded-md text-[9px] font-bold text-[#534AB7] shadow-sm border border-[#534AB7]/20">
+              FUZZY
+            </div>
+          </div>
+        </motion.div>
+
+        {/* Cascading Search Results */}
+        <div className="w-[95%] mt-6 relative z-20">
+          {/* Line connecting to results */}
+          <div className="absolute top-[-24px] left-8 w-[2px] h-6 bg-gradient-to-b from-[#534AB7]/50 to-transparent" />
+
+          <div className="space-y-3">
+            {[1, 2].map((i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.5 + i * 0.1,
+                  type: "spring",
+                  stiffness: 100,
+                }}
+                className="w-full bg-white/80 backdrop-blur-xl rounded-xl border border-white shadow-[0_10px_30px_rgba(0,0,0,0.05)] p-4 relative overflow-hidden"
+              >
+                <div className="absolute left-0 top-0 bottom-0 w-1 bg-[#3478F6]" />
+                <div className="flex gap-4">
+                  <div className="w-10 h-12 bg-slate-100 rounded-md border border-slate-200 flex items-center justify-center flex-shrink-0">
+                    <div className="text-[8px] font-bold text-slate-400">
+                      PDF
+                    </div>
+                  </div>
+                  <div className="w-full space-y-2 pt-1">
+                    <div className="flex gap-2 items-center">
+                      <div className="h-2 bg-slate-200 rounded w-16" />
+                      {/* Highlighted keyword */}
+                      <motion.div
+                        animate={{ opacity: [0.5, 1, 0.5] }}
+                        transition={{ repeat: Infinity, duration: 1.5 }}
+                        className="h-2.5 bg-[#FFED86] rounded w-20 shadow-[0_0_5px_rgba(255,237,134,0.8)]"
+                      />
+                      <div className="h-2 bg-slate-200 rounded w-24" />
+                    </div>
+                    <div className="h-1.5 bg-slate-100 rounded w-full" />
+                  </div>
+                </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -323,273 +895,179 @@ function BillingMockup() {
   );
 }
 
-function AgenticMockup() {
+function RedactMockup() {
   return (
-    <div className="absolute inset-0 flex flex-col items-center justify-start pt-12 p-8">
-      {/* Background Particles Bloom */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full overflow-hidden pointer-events-none opacity-40">
-           {Array.from({ length: 40 }).map((_, i) => (
-               <motion.div
-                key={i}
-                className="absolute w-1 h-1 bg-[#ff5db1] rounded-full"
-                style={{
-                    left: `${Math.random() * 100}%`,
-                    top: `${Math.random() * 100}%`,
-                }}
-                animate={{
-                    scale: [1, 2, 1],
-                    opacity: [0.1, 0.4, 0.1],
-                }}
-                transition={{
-                    duration: 3 + Math.random() * 4,
-                    repeat: Infinity,
-                }}
-               />
-           ))}
+    <div className="absolute inset-0 flex items-center justify-center mt-20 p-8">
+      {/* Ambient red warning glow */}
+      <div className="absolute top-1/2 left-1/2 -mt-20 -ml-20 w-40 h-40 bg-red-500/10 rounded-full blur-[50px] pointer-events-none" />
+
+      <div className="w-full max-w-[200px] space-y-4 bg-white/50 backdrop-blur p-6 rounded-2xl border border-white/60 shadow-lg relative z-10">
+        <div className="h-2.5 w-full bg-slate-200/80 rounded" />
+        <div className="flex gap-2 relative">
+          <div className="h-2.5 w-1/4 bg-slate-200/80 rounded" />
+          <div className="h-2.5 w-1/3 bg-slate-200/80 rounded" />
+          {/* Redaction box sliding over with a laser effect */}
+          <motion.div
+            initial={{ width: "0%" }}
+            whileInView={{ width: "35%" }}
+            transition={{ duration: 0.6, delay: 0.8, ease: "easeOut" }}
+            className="absolute left-[28%] top-[-3px] bottom-[-3px] bg-[#0A2540] rounded flex items-center justify-end overflow-hidden z-20"
+          >
+            {/* Laser edge */}
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ delay: 1.4 }}
+              className="w-[2px] h-full bg-red-500 shadow-[0_0_10px_red]"
+            />
+          </motion.div>
+          <div className="h-2.5 w-1/4 bg-slate-200/80 rounded" />
+        </div>
+        <div className="h-2.5 w-5/6 bg-slate-200/80 rounded" />
+        <div className="flex gap-2 relative">
+          <div className="h-2.5 w-1/2 bg-slate-200/80 rounded" />
+          <motion.div
+            initial={{ width: "0%" }}
+            whileInView={{ width: "25%" }}
+            transition={{ duration: 0.6, delay: 1.2, ease: "easeOut" }}
+            className="absolute left-[54%] top-[-3px] bottom-[-3px] bg-[#0A2540] rounded flex items-center justify-end overflow-hidden z-20"
+          >
+            <motion.div
+              initial={{ opacity: 1 }}
+              animate={{ opacity: 0 }}
+              transition={{ delay: 1.8 }}
+              className="w-[2px] h-full bg-red-500 shadow-[0_0_10px_red]"
+            />
+          </motion.div>
+        </div>
       </div>
 
-      {/* Chat Messages */}
-      <div className="w-full max-w-[320px] space-y-4 mb-8">
-        <div className="bg-white rounded-2xl rounded-tr-sm p-4 shadow-sm border border-slate-50 ml-auto max-w-[240px]">
-           <p className="text-[10px] text-stripe-dark leading-relaxed">
-             I'm refreshing my wardrobe. Can you recommend some cozy, comfortable basics in size M?
-           </p>
-        </div>
-        <div className="bg-white rounded-2xl rounded-tl-sm p-4 shadow-sm border border-slate-50 mr-auto max-w-[240px]">
-           <p className="text-[10px] text-stripe-dark leading-relaxed">
-             Absolutely. Here are a few comfy essentials that pair well and could be a good starting point:
-           </p>
-        </div>
-      </div>
-
-      {/* Product Grid Mockup */}
-      <div className="w-full max-w-[340px] bg-white rounded-2xl p-4 shadow-2xl border border-slate-50 relative z-10">
-        <div className="grid grid-cols-2 gap-4">
-           {[
-             { name: "Deluxe Shirt", color: "Blue - Medium", price: "$26.00", bg: "bg-blue-500" },
-             { name: "Essential Hoodie", color: "Navy - Medium", price: "$48.00", bg: "bg-[#1a1f36]" }
-           ].map((product) => (
-             <div key={product.name} className="flex flex-col border border-slate-50 rounded-xl overflow-hidden shadow-sm">
-                <div className={`h-32 ${product.bg} flex items-center justify-center p-4`}>
-                    {/* Stylized clothing icon */}
-                    <div className="w-16 h-16 opacity-30 bg-white rounded-full flex items-center justify-center">
-                         <div className="w-8 h-8 border-2 border-white rounded-t-lg" />
-                    </div>
-                </div>
-                <div className="p-3">
-                    <p className="text-[10px] font-bold text-stripe-dark">{product.name}</p>
-                    <p className="text-[8px] text-slate-400 font-medium">{product.color}</p>
-                    <p className="text-[9px] font-[800] text-stripe-dark mt-2">{product.price}</p>
-                    <p className="text-[8px] text-slate-300 mt-1">Cartsy</p>
-                </div>
-             </div>
-           ))}
-        </div>
-        <button className="w-full mt-4 py-3 bg-[#e8f0fe] rounded-xl text-stripe-purple text-[11px] font-[800] active:scale-95 transition-transform tracking-tight">
-            Buy now
-        </button>
-      </div>
-    </div>
-  );
-}
-
-function IssuingMockup() {
-  return (
-    <div className="absolute inset-0 flex items-center justify-center bg-gradient-to-br from-slate-50/50 to-white overflow-hidden">
-      {/* Ambient glow sweep */}
-      <div className="absolute top-0 right-0 w-full h-full bg-gradient-to-tr from-[#ad6bff]/0 via-[#ad6bff]/5 to-transparent blur-3xl" />
-      
-      {/* Vertical Card */}
       <motion.div
-        animate={{ y: [0, -12, 0] }}
-        transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
-        className="relative w-[220px] h-[340px] rounded-[2rem] shadow-2xl overflow-hidden group border border-white/50"
+        animate={{ rotate: -90 }}
+        className="absolute bottom-6 right-6 flex items-center justify-center p-2 bg-red-50 text-red-500 border border-red-100 rounded-full shadow-lg"
       >
-        {/* Mesh Gradient Background */}
-        <div className="absolute inset-0 bg-[#fff] z-0" />
-        <div className="absolute top-0 left-0 w-full h-[150%] bg-gradient-to-br from-[#ff9bf5] via-[#a394ff] to-[#ffba43] rotate-[15deg] origin-top opacity-90" />
-        <div className="absolute -bottom-10 left-0 w-full h-1/2 bg-white skew-y-[-10deg] origin-bottom-left" />
-        
-        {/* Card Details */}
-        <div className="absolute inset-0 z-10 p-8 flex flex-col justify-between">
-            <div className="flex justify-between items-start">
-                {/* Chip */}
-                <div className="w-10 h-8 rounded-md bg-white/20 backdrop-blur-sm border border-white/20" />
-                <Maximize2 size={20} className="text-white opacity-60" />
-            </div>
-            
-            <div className="flex justify-between items-end">
-                <div className="space-y-4">
-                     <div className="w-[120px] h-2 bg-white/30 rounded-full" />
-                     <div className="w-[80px] h-3 bg-white/30 rounded-full" />
-                </div>
-                <div className="text-[20px] font-[800] italic text-stripe-dark tracking-tighter">
-                   VISA
-                </div>
-            </div>
+        <div className="w-6 h-6 flex items-center justify-center rounded-full bg-red-500/20">
+          <div className="w-2.5 h-2.5 bg-red-500 rounded-sm" />
         </div>
       </motion.div>
     </div>
   );
 }
 
-function CryptoMockup() {
-  const points = Array.from({ length: 400 }).map((_, i) => {
-    const angle = Math.random() * Math.PI * 2;
-    const r = Math.sqrt(Math.random()) * 40;
-    return {
-      cx: 50 + r * Math.cos(angle),
-      cy: 50 + r * Math.sin(angle),
-      color: i % 4 === 0 ? "#635bff" : i % 4 === 1 ? "#ad6bff" : i % 4 === 2 ? "#ffba43" : "#ff5db1",
-    };
-  });
-
+function ProduceMockup() {
   return (
-    <div className="absolute inset-0 flex items-center justify-center p-8">
-      <div className="relative w-full h-full">
-        {/* Floating Labels */}
-        <motion.div 
-            animate={{ y: [-2, 2, -2] }}
-            transition={{ duration: 3, repeat: Infinity }}
-            className="absolute top-1/4 left-0 z-20 bg-white rounded-lg shadow-xl p-2 border border-slate-50 flex items-center gap-2"
-        >
-            <div className="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-[10px] text-white">🦊</div>
-            <span className="text-[10px] font-bold text-stripe-dark">$879 <span className="text-slate-400">USDC</span></span>
-        </motion.div>
-        
-        <motion.div 
-            animate={{ y: [2, -2, 2] }}
-            transition={{ duration: 4, repeat: Infinity }}
-            className="absolute bottom-1/3 right-1/4 z-20 bg-white rounded-lg shadow-xl p-2 border border-slate-50 flex items-center gap-2"
-        >
-            <div className="w-5 h-5 rounded bg-purple-500 flex items-center justify-center text-[10px] text-white">👻</div>
-            <span className="text-[10px] font-bold text-stripe-dark">$381 <span className="text-slate-400">CASH</span></span>
-        </motion.div>
-
-        {/* Dense Dot Globe */}
-        <svg viewBox="0 0 100 100" className="w-full h-full">
-          {points.map((p, i) => (
-             <motion.circle
-                key={i}
-                cx={p.cx}
-                cy={p.cy}
-                r={0.4}
-                fill={p.color}
-                initial={{ opacity: 0 }}
-                animate={{ opacity: [0.1, 0.6, 0.1] }}
-                transition={{ duration: 2 + Math.random() * 4, repeat: Infinity, delay: Math.random() * 4 }}
-             />
-          ))}
-          {/* Paths */}
-          <motion.path
-            d="M 20 40 Q 50 10 80 50"
-            fill="none"
-            stroke="#ff5db1"
-            strokeWidth="0.2"
-            strokeDasharray="1,2"
-            animate={{ strokeDashoffset: [0, 10] }}
-            transition={{ duration: 10, repeat: Infinity, ease: "linear" }}
-          />
-          <motion.path
-            d="M 10 60 Q 50 90 90 40"
-            fill="none"
-            stroke="#635bff"
-            strokeWidth="0.2"
-            strokeDasharray="1,2"
-            animate={{ strokeDashoffset: [0, -10] }}
-            transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-          />
-        </svg>
-      </div>
-    </div>
-  );
-}
-
-function PlatformMockup() {
-  return (
-    <div className="absolute inset-0 flex flex-col pt-12">
-      {/* URL Bar */}
-      <div className="mx-12 h-10 bg-white border border-slate-100 rounded-t-xl flex items-center px-4 relative z-20">
-         <div className="flex gap-1.5 mr-auto">
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-              <div className="w-2 h-2 rounded-full bg-slate-200" />
-         </div>
-         <div className="absolute left-1/2 -translate-x-1/2 w-64 h-6 bg-slate-50/50 rounded-full flex items-center justify-center gap-2 border border-slate-50">
-            <span className="text-[9px] text-slate-400">dashboard.zenflow.com</span>
-         </div>
-      </div>
-      
-      <div className="flex-1 mx-12 bg-white shadow-2xl border border-slate-100 flex overflow-hidden">
-        {/* Receipt Float */}
-        <motion.div 
-            initial={{ x: -20, opacity: 0 }}
-            whileInView={{ x: 0, opacity: 1 }}
-            className="absolute left-20 top-24 w-[240px] bg-white rounded-2xl shadow-2xl p-6 border border-slate-50 z-30 flex flex-col"
-        >
-            <div className="flex items-center gap-3 mb-6">
-                <div className="w-10 h-10 rounded-full bg-orange-500 flex items-center justify-center text-white font-bold">J</div>
-                <p className="text-[12px] font-bold text-stripe-dark">Jackson Hot Yoga</p>
-            </div>
-            <div className="space-y-4">
-                <p className="text-[10px] font-bold text-stripe-dark leading-tight">Thank you!<br/><span className="text-slate-400 font-medium">Your payment was successful.</span></p>
-                <div className="pt-4 space-y-3 border-t border-slate-100 text-[9px]">
-                    <div className="flex justify-between"><span className="text-slate-400">Order number</span><span className="text-stripe-dark">#2945467</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">Date</span><span className="text-stripe-dark">Feb 25</span></div>
-                    <div className="flex justify-between"><span className="text-slate-400">Payment method</span><span className="text-stripe-dark text-[11px] font-black italic">zip</span></div>
-                    <div className="flex justify-between font-bold pt-3"><span className="text-stripe-dark">Total</span><span className="text-stripe-dark">A$72.00</span></div>
-                </div>
-            </div>
-        </motion.div>
-
-        {/* Sidebar */}
-        <div className="w-56 bg-white border-r border-slate-50 p-6 pt-12 space-y-6">
-          <div className="flex items-center gap-2 mb-10">
-             <div className="w-8 h-8 rounded-lg bg-[#ff5db1]/10 flex items-center justify-center text-[#ff5db1]">🌸</div>
-             <p className="text-[12px] font-[800] text-stripe-dark">Zenflow</p>
+    <div className="absolute inset-0 flex items-end justify-center overflow-hidden pb-4">
+      {/* Main prominent document */}
+      <motion.div
+        animate={{ y: [0, -15, 0], scale: [1, 1.02, 1] }}
+        transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
+        className="w-[220px] h-[280px] bg-white rounded-xl shadow-[0_30px_60px_rgba(0,0,0,0.15)] border border-slate-100 p-6 flex flex-col relative z-30"
+      >
+        <div className="w-full text-right mb-8">
+          <motion.span
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            className="inline-block font-mono text-[10px] font-bold text-white bg-[#0A2540] px-2 py-1 rounded shadow-md uppercase tracking-widest relative overflow-hidden"
+          >
+            <motion.div
+              initial={{ left: "-100%" }}
+              whileInView={{ left: "100%" }}
+              transition={{ duration: 1, delay: 0.5 }}
+              className="absolute inset-y-0 w-4 bg-white/30 skew-x-12"
+            />
+            CRI-0000142
+          </motion.span>
+        </div>
+        <div className="flex-1 space-y-4 flex flex-col justify-center opacity-80">
+          <div className="h-2 w-full bg-slate-200 rounded" />
+          <div className="h-2 w-[85%] bg-slate-200 rounded" />
+          <div className="h-2 w-full bg-slate-200 rounded" />
+          <div className="h-2 w-[70%] bg-slate-200 rounded" />
+        </div>
+        <div className="mt-auto flex gap-2">
+          <div className="w-8 h-8 rounded-lg border-2 border-red-500/20 flex items-center justify-center relative">
+            <motion.div
+              initial={{ scale: 2, opacity: 0 }}
+              whileInView={{ scale: 1, opacity: 1 }}
+              transition={{ delay: 0.8 }}
+              className="absolute text-red-500 font-bold text-[8px] transform -rotate-12"
+            >
+              CONF
+            </motion.div>
           </div>
-          {[1, 2, 3, 4, 5].map((i) => (
-            <div key={i} className={`flex items-center gap-2 ${i === 2 ? "text-stripe-dark opacity-100" : "opacity-30"}`}>
-               <div className="w-4 h-4 rounded-sm bg-slate-200" />
-               <div className="w-20 h-2 bg-slate-200 rounded" />
-            </div>
-          ))}
         </div>
+      </motion.div>
 
-        {/* Dashboard Content */}
-        <div className="flex-1 p-10 pt-12 pl-12">
-            <h4 className="text-[16px] font-[800] text-stripe-dark mb-8">Connected Accounts</h4>
-            <div className="space-y-4 overflow-hidden">
-                <div className="grid grid-cols-4 text-[9px] font-bold text-slate-400 uppercase tracking-wider mb-2">
-                    <span className="col-span-1">Accounts</span>
-                    <span>Account country</span>
-                    <span>Payment balance (USD)</span>
-                    <span>Volume (USD)</span>
-                </div>
-                {[
-                    { name: "Vital Flow", country: "Canada", flag: "🇨🇦", balance: "$8,348.00", vol: "$71,562.98" },
-                    { name: "Daybreak Yoga", country: "United States", flag: "🇺🇸", balance: "$1,502.00", vol: "$8,879.00", active: true },
-                    { name: "Sacred Space", country: "UK", flag: "🇬🇧", balance: "$1,247.00", vol: "$24,569.09" },
-                    { name: "Jackson Hot Yoga", country: "Australia", flag: "🇦🇺", balance: "$3,660.00", vol: "$12,691.00" },
-                    { name: "Harmony Flow", country: "United States", flag: "🇺🇸", balance: "$30,930.00", vol: "$294,669.65" },
-                ].map((account) => (
-                    <div key={account.name} className={`grid grid-cols-4 p-2.5 rounded-lg text-[10px] items-center ${account.active ? "bg-stripe-purple/5 shadow-sm" : ""}`}>
-                        <div className="flex items-center gap-2 font-bold text-stripe-dark">
-                            <div className="w-5 h-5 rounded bg-slate-100 flex items-center justify-center text-[8px]">{account.name[0]}</div>
-                            {account.name}
-                        </div>
-                        <span className="text-slate-500 font-medium">{account.country} <span className="ml-1 opacity-60">{account.flag}</span></span>
-                        <span className="text-stripe-dark font-bold">{account.balance}</span>
-                        <span className="text-stripe-dark font-bold">{account.vol}</span>
-                    </div>
-                ))}
-            </div>
-        </div>
-      </div>
-      {/* Background radial highlight */}
-      <div className="absolute top-0 right-0 w-[400px] h-full bg-gradient-to-l from-[#ad6bff]/10 via-[#ad6bff]/5 to-transparent blur-3xl" />
+      {/* Background cascading cards to imply mass production */}
+      {[1, 2].map((i) => (
+        <motion.div
+          key={i}
+          initial={{ y: 0 }}
+          animate={{ y: i === 1 ? -25 : -45 }}
+          transition={{ type: "spring", damping: 12, delay: i * 0.2 }}
+          style={{
+            scale: 1 - i * 0.05,
+            zIndex: 20 - i,
+            opacity: 1 - i * 0.2,
+          }}
+          className="absolute bottom-4 w-[220px] h-[280px] bg-slate-50 rounded-xl border border-slate-200 shadow-xl"
+        />
+      ))}
     </div>
   );
 }
 
+function FieldsMockup() {
+  return (
+    <div className="absolute right-0 bottom-0 top-16 w-[320px] bg-white rounded-tl-[32px] shadow-[-20px_0_60px_rgba(0,0,0,0.1)] border-t border-l border-white/50 p-6 flex flex-col gap-4 backdrop-blur-sm z-20 transition-transform hover:-translate-y-2 duration-500">
+      <div className="flex items-center justify-between mb-2">
+        <p className="text-[11px] font-[800] text-[#0A2540] uppercase tracking-widest">
+          Dynamic Coding Panel
+        </p>
+        <div className="px-2 py-0.5 bg-[#FFF3E0] text-[#E67B00] rounded text-[8px] font-bold">
+          AUTO-SYNCED
+        </div>
+      </div>
 
+      <div className="space-y-3">
+        {[
+          { name: "Responsiveness", active: true, color: "bg-[#3478F6]" },
+          { name: "Privilege", active: true, color: "bg-[#534AB7]" },
+          { name: "Issues", active: true, color: "bg-[#FF5DB1]" },
+          { name: "Confidentiality", active: false, color: "bg-slate-300" },
+        ].map((f, i) => (
+          <motion.div
+            key={i}
+            initial={{ opacity: 0, x: 20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ delay: i * 0.1 }}
+            className="group flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-slate-100 hover:border-[#3478F6]/30 transition-colors shadow-sm"
+          >
+            <div className="flex gap-3 items-center">
+              <div
+                className={`w-1.5 h-1.5 rounded-full ${f.active ? f.color : "bg-slate-300"}`}
+              />
+              <span className="text-[12px] font-[600] text-[#080E23]">
+                {f.name}
+              </span>
+            </div>
+
+            {/* Fancy Toggle Switch */}
+            <div
+              className={`w-10 h-5 rounded-full p-0.5 transition-colors duration-300 ${f.active ? f.color : "bg-slate-200"} shadow-inner flex items-center`}
+            >
+              <motion.div
+                layout
+                transition={{ type: "spring", stiffness: 700, damping: 30 }}
+                className={`w-4 h-4 bg-white rounded-full shadow-[0_2px_5px_rgba(0,0,0,0.2)] ${f.active ? "ml-auto" : "mr-auto"}`}
+              />
+            </div>
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Glowing gradient cast on the parent */}
+      <div className="absolute top-0 right-0 w-full h-32 bg-gradient-to-b from-white/90 to-transparent rounded-tl-[32px] pointer-events-none" />
+    </div>
+  );
+}

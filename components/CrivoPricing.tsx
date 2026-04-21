@@ -1,7 +1,6 @@
 "use client";
 
 import React from "react";
-import { Check } from "lucide-react";
 import { motion } from "framer-motion";
 
 const containerVars = {
@@ -67,7 +66,6 @@ function FeatureList({ features }: { features: string[] }) {
           className="flex items-start gap-3 py-3.5 border-b border-slate-100 last:border-b-0"
         >
           <div className="mt-[2px] shrink-0 text-[#534AB7]">
-            {/* Standard exact check mark mimicking the screenshot */}
             <svg
               width="14"
               height="14"
@@ -90,53 +88,72 @@ function FeatureList({ features }: { features: string[] }) {
 
 export default function CrivoPricing() {
   return (
-    <section id="pricing" className="w-full bg-white py-24 md:py-32 font-sans overflow-hidden">
+    <section
+      id="pricing"
+      className="w-full bg-white py-24 md:py-32 font-sans overflow-hidden"
+    >
       <div className="max-w-[1240px] mx-auto px-6 md:px-10">
-        
         {/* Header Section */}
-        <motion.div 
+        <motion.div
           className="text-center max-w-[700px] mx-auto mb-16 md:mb-24"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVars}
         >
-          <motion.h4 variants={itemVars} className="text-[12px] font-bold text-[#534AB7] tracking-[0.16em] uppercase mb-6">
+          <motion.h4
+            variants={itemVars}
+            className="text-[12px] font-bold text-[#534AB7] tracking-[0.16em] uppercase mb-6"
+          >
             PRICING
           </motion.h4>
-          <motion.h2 variants={itemVars} className="text-[36px] sm:text-[44px] md:text-[50px] leading-[1.1] font-bold text-black font-serif tracking-tight mb-6">
+          <motion.h2
+            variants={itemVars}
+            className="text-[36px] sm:text-[44px] md:text-[50px] leading-[1.1] font-bold text-black font-serif tracking-tight mb-6"
+          >
             One price. No surprises. <br className="hidden sm:block" />
             Tell your client before you start.
           </motion.h2>
-          <motion.p variants={itemVars} className="text-[16px] sm:text-[18px] text-slate-500 font-medium leading-[1.6]">
-            Crivo charges per reviewer, not per gigabyte. The cost you see is the cost you pay — and the cost you can quote.
+          <motion.p
+            variants={itemVars}
+            className="text-[16px] sm:text-[18px] text-slate-500 font-medium leading-[1.6]"
+          >
+            Crivo charges per reviewer, not per gigabyte. The cost you see is
+            the cost you pay — and the cost you can quote.
           </motion.p>
         </motion.div>
 
         {/* Pricing Grid */}
-        <motion.div 
+        <motion.div
           className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-start"
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true, margin: "-50px" }}
           variants={containerVars}
         >
-          
           {/* Card 1: Essentials */}
-          <motion.div variants={itemVars} className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg">
+          <motion.div
+            variants={itemVars}
+            className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
+          >
             <div className="mb-8 border-b border-slate-100 pb-8">
               <h3 className="text-[12px] font-bold text-[#3478F6] tracking-[0.1em] uppercase mb-4">
                 ESSENTIALS
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">$149</span>
-                <span className="text-[14px] text-slate-400 font-medium">/user/mo</span>
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                  $149
+                </span>
+                <span className="text-[14px] text-slate-400 font-medium">
+                  /user/mo
+                </span>
               </div>
               <p className="text-[14px] leading-[1.5] text-[#94a3b8] font-medium min-h-[42px]">
-                For boutique litigation firms handling focused matters with smaller teams.
+                For boutique litigation firms handling focused matters with
+                smaller teams.
               </p>
             </div>
-            
+
             <div className="flex-1">
               <FeatureList features={essentialsFeatures} />
             </div>
@@ -152,7 +169,10 @@ export default function CrivoPricing() {
           </motion.div>
 
           {/* Card 2: Professional (Highlighted) */}
-          <motion.div variants={itemVars} className="relative bg-white border-2 border-[#111827] rounded-2xl p-8 lg:p-10 flex flex-col h-full shadow-2xl shadow-slate-200/50 lg:-mt-2 z-10">
+          <motion.div
+            variants={itemVars}
+            className="relative bg-white border-2 border-[#111827] rounded-2xl p-8 lg:p-10 flex flex-col h-full shadow-2xl shadow-slate-200/50 lg:-mt-2 z-10"
+          >
             {/* Badge */}
             <div className="absolute -top-3.5 inset-x-0 flex justify-center">
               <div className="bg-[#111827] text-white text-[11px] font-bold tracking-wide uppercase px-4 py-1.5 rounded-full">
@@ -165,14 +185,19 @@ export default function CrivoPricing() {
                 PROFESSIONAL
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">$349</span>
-                <span className="text-[14px] text-slate-400 font-medium">/user/mo</span>
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                  $349
+                </span>
+                <span className="text-[14px] text-slate-400 font-medium">
+                  /user/mo
+                </span>
               </div>
               <p className="text-[14px] leading-[1.5] text-[#94a3b8] font-medium min-h-[42px]">
-                For law firms with complex, multi-matter discovery and demanding client standards.
+                For law firms with complex, multi-matter discovery and demanding
+                client standards.
               </p>
             </div>
-            
+
             <div className="flex-1">
               <FeatureList features={professionalFeatures} />
             </div>
@@ -188,19 +213,25 @@ export default function CrivoPricing() {
           </motion.div>
 
           {/* Card 3: Enterprise */}
-          <motion.div variants={itemVars} className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg">
+          <motion.div
+            variants={itemVars}
+            className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
+          >
             <div className="mb-8 border-b border-slate-100 pb-8">
               <h3 className="text-[12px] font-bold text-[#3478F6] tracking-[0.1em] uppercase mb-4">
                 ENTERPRISE
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">Custom</span>
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                  Custom
+                </span>
               </div>
               <p className="text-[14px] leading-[1.5] text-[#94a3b8] font-medium min-h-[42px]">
-                For AmLaw firms, government agencies, and legal service providers requiring maximum control.
+                For AmLaw firms, government agencies, and legal service
+                providers requiring maximum control.
               </p>
             </div>
-            
+
             <div className="flex-1">
               <FeatureList features={enterpriseFeatures} />
             </div>
@@ -214,7 +245,6 @@ export default function CrivoPricing() {
               </p>
             </div>
           </motion.div>
-
         </motion.div>
       </div>
     </section>
