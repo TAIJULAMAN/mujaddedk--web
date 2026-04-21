@@ -1,10 +1,12 @@
 "use client";
 
-import React from "react";
+import React, { useRef } from "react";
 import { motion } from "framer-motion";
-import { PlayCircle } from "lucide-react";
+import { PlayCircle, ArrowRight } from "lucide-react";
 
 export default function CrivoCTA() {
+  const containerRef = useRef<HTMLDivElement>(null);
+
   const items = [
     "Boutique Litigation",
     "AmLaw 200",
@@ -15,57 +17,139 @@ export default function CrivoCTA() {
   ];
 
   return (
-    <section id="demo" className="relative py-28 md:py-36 bg-[#0B132B] overflow-hidden text-center">
-      <div className="max-w-[850px] mx-auto px-6 relative z-10">
-        <motion.h2 
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          className="text-[32px] sm:text-[40px] md:text-[46px] font-[700] text-white font-serif leading-[1.1] mb-6 tracking-tight"
-        >
-          Ready to give your firm a <br className="hidden sm:block" /> 
-          genuine advantage in discovery?
-        </motion.h2>
+    <section 
+      id="demo" 
+      ref={containerRef}
+      className="relative py-28 md:py-40 bg-[#060D1E] overflow-hidden flex items-center justify-center"
+    >
+      {/* Dark gradient base */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[#0B132B] to-[#050C1B] z-0" />
+      
+      {/* Animated Glowing Orbs */}
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.2, 1], 
+          x: [0, 80, 0], 
+          y: [0, -60, 0] 
+        }}
+        transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3478F6] opacity-[0.15] blur-[100px] rounded-full mix-blend-screen pointer-events-none z-0" 
+      />
+      <motion.div 
+        animate={{ 
+          scale: [1, 1.3, 1], 
+          x: [0, -60, 0], 
+          y: [0, 80, 0] 
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
+        className="absolute bottom-0 right-[15%] translate-x-1/4 w-[500px] h-[500px] bg-[#FF5DB1] opacity-[0.12] blur-[120px] rounded-full mix-blend-screen pointer-events-none z-0" 
+      />
+      
+      {/* Grid Pattern overlay */}
+      <div 
+        className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none" 
+        style={{ 
+          backgroundImage: 'linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)', 
+          backgroundSize: '40px 40px' 
+        }} 
+      />
+
+      <div className="max-w-[1100px] w-full mx-auto px-6 relative z-10 flex flex-col items-center">
         
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.1 }}
-          className="text-[#96a8c7] text-[15px] sm:text-[16px] font-medium leading-[1.6] max-w-[500px] mx-auto mb-10"
-        >
-          See a live demonstration with your own documents — not a scripted demo. 
-          Fourteen days to evaluate on a real matter, no credit card required.
-        </motion.p>
-        
+        {/* Glassmorphic Container */}
         <motion.div
-           initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.2 }}
-          className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-14"
+           initial={{ opacity: 0, y: 40, scale: 0.95 }}
+           whileInView={{ opacity: 1, y: 0, scale: 1 }}
+           viewport={{ once: true }}
+           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+           className="w-full relative rounded-3xl md:rounded-[40px] border border-white/10 bg-[#0f172a]/60 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.5)] overflow-hidden"
         >
-          <button className="w-full sm:w-auto bg-[#3478F6] hover:bg-[#2563EB] text-white font-bold py-3 px-6 rounded-lg flex items-center justify-center gap-2 transition-colors">
-            <PlayCircle size={18} /> Schedule a Demonstration
-          </button>
+          {/* Subtle top border gradient */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3478F6] to-transparent opacity-60" />
           
-          <a href="#pricing" className="w-full sm:w-auto bg-transparent border-[1.5px] border-slate-700 hover:border-slate-500 hover:bg-white/5 text-white font-semibold py-3 px-8 rounded-lg transition-colors">
-            View Pricing
-          </a>
+          <div className="p-10 md:p-16 lg:p-20 text-center flex flex-col items-center relative z-10">
+            
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.2 }}
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-white/80 text-[11px] font-[800] tracking-[0.15em] uppercase mb-8 shadow-inner"
+            >
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3478F6] opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3478F6]"></span>
+              </span>
+              Start your free trial
+            </motion.div>
+
+            <motion.h2 
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.3 }}
+              className="text-[34px] sm:text-[46px] md:text-[56px] font-[800] text-transparent bg-clip-text bg-gradient-to-b from-white to-[#a3b8d4] leading-[1.1] tracking-tight mb-6 max-w-[800px]"
+            >
+              Ready to give your firm a genuine advantage in discovery?
+            </motion.h2>
+            
+            <motion.p
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.4 }}
+              className="text-[#96a8c7] text-[16px] md:text-[18px] font-medium leading-relaxed max-w-[550px] mx-auto mb-12"
+            >
+              See a live demonstration with your own documents — not a scripted demo. 
+              Fourteen days to evaluate on a real matter, no credit card required.
+            </motion.p>
+            
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.5 }}
+              className="flex flex-col sm:flex-row justify-center items-center gap-5 w-full sm:w-auto"
+            >
+              {/* Primary Premium Button */}
+              <button className="relative group w-full sm:w-auto px-8 py-4 rounded-xl text-white font-bold flex items-center justify-center overflow-hidden shadow-[0_0_40px_-10px_rgba(52,120,246,0.6)] hover:shadow-[0_0_60px_-10px_rgba(52,120,246,0.8)] transition-all duration-300">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#3478F6] via-[#2563EB] to-[#6034f6] scale-[1.05] group-hover:scale-100 transition-transform duration-500" />
+                <span className="relative z-10 flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
+                  <PlayCircle size={18} className="opacity-90" /> 
+                  Schedule a Demonstration
+                </span>
+              </button>
+              
+              {/* Secondary Premium Button */}
+              <a href="#pricing" className="w-full sm:w-auto bg-[#0a1128]/50 border border-white/20 hover:border-white/50 text-white font-semibold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-white/10">
+                View Pricing
+                <ArrowRight size={16} className="opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300" />
+              </a>
+            </motion.div>
+          </div>
+          
+          {/* Decorative Corner Glow */}
+          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-[#3478F6] opacity-[0.1] blur-[80px] rounded-full" />
+          <div className="absolute -top-32 -right-32 w-64 h-64 bg-[#FF5DB1] opacity-[0.1] blur-[80px] rounded-full" />
         </motion.div>
-        
+
+        {/* Footer Items below the container */}
         <motion.div
            initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true, margin: "-100px" }}
-          transition={{ delay: 0.3 }}
-          className="flex flex-wrap justify-center items-center gap-x-5 gap-y-3 text-[#5A6F96] text-[11px] font-bold tracking-wide"
+           whileInView={{ opacity: 1 }}
+           viewport={{ once: true }}
+           transition={{ delay: 0.7 }}
+           className="mt-12 flex flex-wrap justify-center items-center gap-x-8 gap-y-4 text-[#5A6F96] text-[12px] md:text-[13px] font-[800] tracking-[0.1em]"
         >
           {items.map((item) => (
-             <span key={item} className="flex items-center gap-2 uppercase">
-                 <span className="w-1 h-1 rounded-full bg-[#3478F6] shrink-0" />
+             <motion.span 
+               key={item} 
+               whileHover={{ color: "#8a9fc4" }}
+               className="flex items-center gap-2.5 uppercase cursor-default transition-colors"
+             >
+                 <span className="w-1.5 h-1.5 rounded-full bg-[#1e2a4a] shrink-0 shadow-[0_0_8px_rgba(255,255,255,0.1)]" />
                  {item}
-             </span>
+             </motion.span>
           ))}
         </motion.div>
       </div>
