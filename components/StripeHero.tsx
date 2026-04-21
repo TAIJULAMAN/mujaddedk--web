@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { motion, Variants } from "framer-motion";
-import { Menu } from "lucide-react";
-import Link from "next/link";
+import Navbar from "./Navbar";
 import { DataFunnel } from "./ui/data-funnel";
 
 // Animation Settings
@@ -28,76 +27,9 @@ const itemVars: Variants = {
 };
 
 export default function StripeHero() {
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 20);
-    };
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
-      {/* --- NAVIGATION --- */}
-      <nav
-        className={`fixed top-0 inset-x-0 z-[100] px-6 md:px-10 transition-all duration-300 ${
-          scrolled
-            ? "py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm"
-            : "py-5 bg-transparent"
-        }`}
-      >
-        <div className="max-w-[1400px] mx-auto flex items-center justify-between">
-          <div className="flex items-center gap-8 lg:gap-12">
-            {/* Logo */}
-            <Link
-              href="/"
-              className="flex items-baseline gap-[2px] text-[22px] font-[800] tracking-[-0.02em] text-black select-none"
-            >
-              crivo<span className="text-[#534AB7] align-baseline">.</span>legal
-            </Link>
-
-            {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-1 text-[15px] font-semibold text-slate-600">
-              {[
-                { name: "Platform", active: true },
-                { name: "Solutions", active: false },
-                { name: "Pricing", active: false },
-                { name: "Docs", active: false },
-                { name: "About", active: false },
-              ].map((item) => (
-                <a
-                  key={item.name}
-                  href="#"
-                  className={`px-4 py-2 rounded-full transition-all duration-200 ${
-                    item.active
-                      ? "bg-[#EEEDFE] text-[#534AB7] font-[700]"
-                      : "hover:bg-[#EEEDFE]/60 hover:text-[#534AB7]"
-                  }`}
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          <div className="flex items-center gap-3">
-            <button className="hidden md:block px-[18px] py-[8px] rounded-full text-[15px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-200">
-              Sign in
-            </button>
-            <button className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]">
-              Request demo
-            </button>
-            {/* Mobile menu */}
-            <button className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors">
-              <Menu size={22} className="text-slate-800" />
-            </button>
-          </div>
-        </div>
-      </nav>
-
-      {/* --- MAIN HERO CONTENT --- */}
+      <Navbar />
       <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-36 md:pb-48">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Text Content */}
@@ -135,7 +67,8 @@ export default function StripeHero() {
               className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-slate-500 font-medium max-w-[540px] mb-10"
             >
               Intelligent document review, transparent billing, and zero
-              re-processing fees — engineered for firms that can&apos;t afford guesswork.
+              re-processing fees — engineered for firms that can&apos;t afford
+              guesswork.
             </motion.p>
 
             {/* CTA Button Group */}
