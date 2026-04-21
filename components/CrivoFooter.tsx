@@ -58,9 +58,9 @@ const footerLinks = {
 
 export default function CrivoFooter() {
   return (
-    <footer className="bg-[#040816] border-t border-slate-800/50 pt-20 pb-12 relative overflow-hidden">
+    <footer className="bg-white border-t border-slate-200 pt-20 pb-12 relative overflow-hidden font-sans">
       {/* Subtle glow effect top aligned with CTA */}
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-[#534AB7]/30 to-transparent"></div>
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
       
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
         {/* Main Footer Grid */}
@@ -68,26 +68,26 @@ export default function CrivoFooter() {
           {/* Logo column */}
           <div className="col-span-2 md:col-span-3 lg:col-span-2 mb-4 lg:mb-0">
             <Link href="/" className="flex flex-col inline-block mb-6">
-              <span className="text-[28px] font-[900] tracking-tight leading-none text-white">
+              <span className="text-[28px] font-[900] tracking-tight leading-none text-[#0A2540]">
                 crivo<span className="text-[#3478F6]">.</span>
               </span>
-              <span className="text-xs font-bold text-[#5A6F96] tracking-widest uppercase mt-1">
+              <span className="text-xs font-bold text-slate-500 tracking-widest uppercase mt-1">
                 Legal Intelligence
               </span>
             </Link>
             
-            <p className="text-[#5A6F96] text-[14px] leading-relaxed max-w-[280px]">
+            <p className="text-slate-600 text-[14px] leading-relaxed max-w-[280px]">
               Advanced AI technology designed to give legal teams a genuine advantage in discovery and document review.
             </p>
             
             <div className="flex items-center gap-3 mt-8">
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
                 <TwitterIcon size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
                 <LinkedinIcon size={18} />
               </a>
-              <a href="#" className="w-10 h-10 rounded-full bg-slate-800/50 flex items-center justify-center text-slate-400 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
+              <a href="#" className="w-10 h-10 rounded-full bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#3478F6] hover:text-white transition-all duration-300">
                 <GithubIcon size={18} />
               </a>
             </div>
@@ -96,7 +96,7 @@ export default function CrivoFooter() {
           {/* Link columns */}
           {Object.entries(footerLinks).map(([category, links]) => (
             <div key={category}>
-              <h4 className="text-[15px] font-bold text-white mb-5 tracking-tight">
+              <h4 className="text-[15px] font-bold text-[#0A2540] mb-5 tracking-tight">
                 {category}
               </h4>
               <ul className="space-y-3">
@@ -104,7 +104,7 @@ export default function CrivoFooter() {
                   <li key={link}>
                     <a
                       href="#"
-                      className="text-[14px] text-[#5A6F96] hover:text-[#3478F6] transition-colors"
+                      className="text-[14px] text-slate-500 hover:text-[#3478F6] font-medium transition-colors"
                     >
                       {link}
                     </a>
@@ -116,20 +116,20 @@ export default function CrivoFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-800/50 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
+        <div className="border-t border-slate-200 pt-8 flex flex-col md:flex-row justify-between items-center gap-4">
           <div className="flex gap-4 items-center">
             <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
-            <span className="text-[13px] text-[#5A6F96] font-medium">All systems operational</span>
+            <span className="text-[13px] text-slate-600 font-medium">All systems operational</span>
           </div>
           
           <div className="flex flex-col md:flex-row items-center gap-6">
             <div className="flex items-center space-x-6">
-              <a href="#" className="text-[13px] text-[#5A6F96] hover:text-white transition-colors">Privacy Policy</a>
-              <a href="#" className="text-[13px] text-[#5A6F96] hover:text-white transition-colors">Terms of Service</a>
-              <a href="#" className="text-[13px] text-[#5A6F96] hover:text-white transition-colors">Cookie Settings</a>
+              <a href="#" className="text-[13px] text-slate-600 hover:text-slate-900 transition-colors">Privacy Policy</a>
+              <a href="#" className="text-[13px] text-slate-600 hover:text-slate-900 transition-colors">Terms of Service</a>
+              <a href="#" className="text-[13px] text-slate-600 hover:text-slate-900 transition-colors">Cookie Settings</a>
             </div>
             
-            <p className="text-[13px] text-[#5A6F96] mt-4 md:mt-0">
+            <p className="text-[13px] text-slate-500 mt-4 md:mt-0">
               © {new Date().getFullYear()} Crivo Legal, Inc. All rights reserved.
             </p>
           </div>

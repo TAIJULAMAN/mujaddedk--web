@@ -25,7 +25,7 @@ export default function StripeGlobalScale() {
 
       {/* Top Divider */}
       <div className="max-w-[1040px] mx-auto w-full relative z-10 px-6">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#e0b0ff] to-transparent opacity-60" />
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-purple-300 to-transparent opacity-60" />
       </div>
 
       {/* Stats Grid */}
@@ -62,13 +62,13 @@ export default function StripeGlobalScale() {
 
       {/* Bottom Divider */}
       <div className="max-w-[1040px] mx-auto w-full relative z-10 px-6">
-        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-[#e0b0ff] to-transparent opacity-60" />
+        <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-purple-300 to-transparent opacity-60" />
       </div>
 
       {/* Silk Burst Presentation Canvas */}
       <div className="max-w-[1200px] mx-auto relative h-[500px] sm:h-[600px] mt-2 sm:mt-8 flex justify-center items-end">
         {/* Glow behind the burst */}
-        <div className="absolute bottom-0 w-[80%] h-[80%] bg-[radial-gradient(ellipse_at_bottom,#ffe3bd_0%,#fff5e6_40%,transparent_70%)] opacity-80 mix-blend-multiply pointer-events-none" />
+        <div className="absolute bottom-0 w-[80%] h-[80%] bg-[radial-gradient(ellipse_at_bottom,#fff8f0_0%,#fffdfa_40%,transparent_70%)] mix-blend-multiply pointer-events-none" />
         
         <SilkBurst isInView={isInView} />
       </div>
@@ -114,7 +114,7 @@ function SilkBurst({ isInView }: { isInView: boolean }) {
       const delay = Math.random() * 4;
       const size = Math.random() * 1.5 + 1;
       
-      const colors = ["#b026aa", "#dd2476", "#ff512f", "#8E2DE2", "#f09819"];
+      const colors = ["#3478F6", "#FF5DB1", "#80e9ff", "#4f46e5", "#c026d3"];
       const color = colors[Math.floor(Math.random() * colors.length)];
       
       return { id: i, angle, length, opacity, duration, delay, size, color };
@@ -128,10 +128,10 @@ function SilkBurst({ isInView }: { isInView: boolean }) {
       
       {/* UI Controls */}
       <div className="absolute top-4 right-10 flex items-center gap-2 z-50">
-         <div className="flex items-center gap-1.5 bg-white/40 backdrop-blur-md border border-pink-200/60 rounded px-2 py-1 text-pink-500 shadow-sm">
-             <Pause size={12} strokeWidth={2.5} className="cursor-pointer hover:text-pink-700" />
-             <div className="w-[1px] h-3 bg-pink-200/60 mx-0.5" />
-             <Sun size={12} strokeWidth={2.5} className="cursor-pointer hover:text-pink-700" />
+         <div className="flex items-center gap-1.5 bg-white/5 backdrop-blur-md border border-white/10 rounded px-2 py-1 text-[#3478F6] shadow-sm">
+             <Pause size={12} strokeWidth={2.5} className="cursor-pointer hover:text-white transition-colors" />
+             <div className="w-[1px] h-3 bg-white/20 mx-0.5" />
+             <Sun size={12} strokeWidth={2.5} className="cursor-pointer hover:text-white transition-colors" />
          </div>
       </div>
 
