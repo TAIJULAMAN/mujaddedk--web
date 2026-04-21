@@ -29,7 +29,7 @@ export default function Navbar() {
   const navLinks = [
     { name: "Platform", active: true, href: "#" },
     { name: "Solutions", active: false, href: "#solutions" },
-    { name: "Pricing", active: false, href: "#pricing" },
+    // { name: "Pricing", active: false, href: "#pricing" },
     { name: "Docs", active: false, href: "#" },
     { name: "About", active: false, href: "#about" },
   ];
@@ -75,7 +75,10 @@ export default function Navbar() {
             <button className="hidden md:block px-[18px] py-[8px] rounded-full text-[15px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-200">
               Sign in
             </button>
-            <Link href="#demo" className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]">
+            <Link
+              href="#demo"
+              className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]"
+            >
               Request demo
             </Link>
             {/* Mobile menu button */}
@@ -115,7 +118,8 @@ export default function Navbar() {
                   className="flex items-baseline gap-[2px] text-[20px] font-[800] tracking-[-0.02em] text-black select-none"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  crivo<span className="text-[#534AB7] align-baseline">.</span>legal
+                  crivo<span className="text-[#534AB7] align-baseline">.</span>
+                  legal
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
@@ -146,7 +150,11 @@ export default function Navbar() {
                 <button className="w-full px-[18px] py-[12px] rounded-xl text-[15px] font-bold text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all duration-200">
                   Sign in
                 </button>
-                <Link href="#demo" onClick={() => setMobileMenuOpen(false)} className="w-full bg-[#534AB7] flex hover:bg-[#3C3489] text-white px-[18px] py-[12px] rounded-xl text-[15px] font-bold items-center justify-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)]">
+                <Link
+                  href="#demo"
+                  onClick={() => setMobileMenuOpen(false)}
+                  className="w-full bg-[#534AB7] flex hover:bg-[#3C3489] text-white px-[18px] py-[12px] rounded-xl text-[15px] font-bold items-center justify-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)]"
+                >
                   Request demo
                 </Link>
               </div>

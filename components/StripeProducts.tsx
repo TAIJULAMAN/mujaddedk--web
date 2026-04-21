@@ -562,7 +562,7 @@ function RenderMockup() {
               >
                 <span>{txt} ...</span>
                 <span className="text-[#3478F6]">
-                  {(Math.random() * 5).toFixed(1)}ms
+                  {(1.2 + i * 0.8).toFixed(1)}ms
                 </span>
               </motion.div>
             ))}
@@ -662,10 +662,10 @@ function ViewMockup() {
 }
 
 function EmailMockup() {
-  const nodes = Array.from({ length: 20 }).map(() => ({
-    x: 10 + Math.random() * 80,
-    y: 10 + Math.random() * 80,
-    size: 2 + Math.random() * 5,
+  const nodes = Array.from({ length: 20 }).map((_, i) => ({
+    x: 10 + ((Math.sin(i * 1234.567) + 1) / 2) * 80,
+    y: 10 + ((Math.cos(i * 7654.321) + 1) / 2) * 80,
+    size: 2 + ((i * 3) % 5),
   }));
   return (
     <div className="absolute inset-0 flex items-center justify-center bg-transparent mt-12 overflow-hidden">
@@ -706,7 +706,7 @@ function EmailMockup() {
             initial={{ scale: 0 }}
             animate={{ scale: [1, 1.4, 1] }}
             transition={{
-              duration: 1.5 + Math.random(),
+              duration: 1.5 + ((i * 7) % 10) / 10,
               delay: i * 0.1,
               repeat: Infinity,
             }}
