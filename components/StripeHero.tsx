@@ -20,9 +20,9 @@ const itemVars: Variants = {
   animate: {
     opacity: 1,
     y: 0,
-    transition: { 
-      duration: 0.8, 
-      ease: [0.21, 0.47, 0.32, 0.98] 
+    transition: {
+      duration: 0.8,
+      ease: [0.21, 0.47, 0.32, 0.98],
     },
   },
 };
@@ -41,9 +41,11 @@ export default function StripeHero() {
   return (
     <div className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
       {/* --- NAVIGATION --- */}
-      <nav 
+      <nav
         className={`fixed top-0 inset-x-0 z-[100] px-6 md:px-10 transition-all duration-300 ${
-          scrolled ? "py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm" : "py-5 bg-transparent"
+          scrolled
+            ? "py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm"
+            : "py-5 bg-transparent"
         }`}
       >
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
@@ -69,8 +71,8 @@ export default function StripeHero() {
                   key={item.name}
                   href="#"
                   className={`px-4 py-2 rounded-full transition-all duration-200 ${
-                    item.active 
-                      ? "bg-[#EEEDFE] text-[#534AB7] font-[700]" 
+                    item.active
+                      ? "bg-[#EEEDFE] text-[#534AB7] font-[700]"
                       : "hover:bg-[#EEEDFE]/60 hover:text-[#534AB7]"
                   }`}
                 >
@@ -96,7 +98,7 @@ export default function StripeHero() {
       </nav>
 
       {/* --- MAIN HERO CONTENT --- */}
-      <main className="relative z-10 max-w-[1400px] mx-auto px-6 md:px-10 pt-12 md:pt-20 pb-36 md:pb-48">
+      <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-36 md:pb-48">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Text Content */}
           <motion.div
@@ -130,9 +132,10 @@ export default function StripeHero() {
             {/* Subtitle */}
             <motion.p
               variants={itemVars}
-              className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-slate-500 font-medium max-w-[440px] mb-10"
+              className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-slate-500 font-medium max-w-[540px] mb-10"
             >
-              Intelligent document review, transparent billing, and zero re-processing fees.
+              Intelligent document review, transparent billing, and zero
+              re-processing fees — engineered for firms that can&apos;t afford guesswork.
             </motion.p>
 
             {/* CTA Button Group */}
@@ -171,4 +174,3 @@ export default function StripeHero() {
     </div>
   );
 }
-

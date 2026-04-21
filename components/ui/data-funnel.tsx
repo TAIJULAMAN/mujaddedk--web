@@ -14,25 +14,38 @@ export function DataFunnel({ className }: { className?: string }) {
   const compId = useId();
 
   return (
-    <div className={`relative w-full h-full flex items-center justify-center ${className || ""}`}>
+    <div
+      className={`relative w-full h-full flex items-center justify-center ${className || ""}`}
+    >
       <svg
         viewBox="0 0 800 600"
         className="w-full h-full max-h-[600px] overflow-visible"
         style={{ filter: "drop-shadow(0px 10px 30px rgba(83, 74, 183, 0.1))" }}
       >
         <defs>
-          <linearGradient id={`${compId}-glow`} x1="0%" y1="0%" x2="100%" y2="100%">
+          <linearGradient
+            id={`${compId}-glow`}
+            x1="0%"
+            y1="0%"
+            x2="100%"
+            y2="100%"
+          >
             <stop offset="0%" stopColor="#7F77DD" />
             <stop offset="100%" stopColor="#534AB7" />
           </linearGradient>
           {/* Gradient for paths */}
-          <linearGradient id={`${compId}-pathGradient`} gradientUnits="userSpaceOnUse" x1="0" y1="0" x2="0" y2="600">
+          <linearGradient
+            id={`${compId}-pathGradient`}
+            gradientUnits="userSpaceOnUse"
+            x1="0"
+            y1="0"
+            x2="0"
+            y2="600"
+          >
             <stop offset="0%" stopColor="#AFA9EC" stopOpacity="0.2" />
             <stop offset="100%" stopColor="#534AB7" stopOpacity="0.8" />
           </linearGradient>
         </defs>
-
-
 
         {/* Streams and Particles */}
         {streams.map((stream, idx) => {
@@ -69,7 +82,11 @@ export function DataFunnel({ className }: { className?: string }) {
               <circle cx={stream.originX} cy="80" r="3" fill="#AFA9EC" />
 
               {/* Particle 1 */}
-              <circle r="4" fill="#534AB7" style={{ filter: "drop-shadow(0 0 4px #7F77DD)" }}>
+              <circle
+                r="4"
+                fill="#534AB7"
+                style={{ filter: "drop-shadow(0 0 4px #7F77DD)" }}
+              >
                 <animateMotion
                   dur="3s"
                   repeatCount="indefinite"
@@ -112,7 +129,15 @@ export function DataFunnel({ className }: { className?: string }) {
         {/* Central Convergence Node (CRIVO) */}
         <g transform="translate(400, 450)">
           {/* Pulsing ring */}
-          <circle cx="0" cy="0" r="35" fill="none" stroke="#7F77DD" strokeWidth="2" className="opacity-50">
+          {/* <circle
+            cx="0"
+            cy="0"
+            r="35"
+            fill="none"
+            stroke="#7F77DD"
+            strokeWidth="2"
+            className="opacity-50"
+          >
             <animate
               attributeName="r"
               values="30; 45; 30"
@@ -125,11 +150,11 @@ export function DataFunnel({ className }: { className?: string }) {
               dur="2.5s"
               repeatCount="indefinite"
             />
-          </circle>
+          </circle> */}
 
           {/* Solid center dot */}
           <circle cx="0" cy="0" r="15" fill={`url(#${compId}-glow)`} />
-          
+
           <text
             x="0"
             y="35"
