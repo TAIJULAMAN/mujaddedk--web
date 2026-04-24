@@ -55,10 +55,9 @@ export default function StripeHero() {
               variants={itemVars}
               className="text-[48px] sm:text-[58px] md:text-[70px] lg:text-[78px] leading-[1.08] font-[800] tracking-[-0.035em] mb-7 text-black"
             >
-              The Platform <br />
-              Built for <br />
-              <span className="text-[#534AB7]">Complex</span> <br />
-              <span className="text-[#AFA9EC]">Matters.</span>
+              eDiscovery <br />
+              Without the <br />
+              <span className="text-[#534AB7]">Guesswork.</span>
             </motion.h1>
 
             {/* Subtitle */}
@@ -66,9 +65,8 @@ export default function StripeHero() {
               variants={itemVars}
               className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-slate-500 font-medium max-w-[540px] mb-10"
             >
-              Intelligent document review, transparent billing, and zero
-              re-processing fees — engineered for firms that can&apos;t afford
-              guesswork.
+              Intelligent document review, transparent billing, no hidden costs,
+              and no surprises.
             </motion.p>
 
             {/* CTA Button Group */}

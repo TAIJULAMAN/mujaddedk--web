@@ -1,13 +1,14 @@
 "use client";
 
 import React, { useId } from "react";
+import { Mail, Smartphone, Share2, Play, Database } from "lucide-react";
 
 const streams = [
-  { label: "RELATIVITY", originX: 100 },
-  { label: "DISCO", originX: 250 },
-  { label: "EVERLAW", originX: 400 },
-  { label: "NUIX", originX: 550 },
-  { label: "LOGIKCULL", originX: 700 },
+  { label: "EMAIL", originX: 100, icon: Mail },
+  { label: "MOBILE", originX: 250, icon: Smartphone },
+  { label: "SOCIAL MEDIA", originX: 400, icon: Share2 },
+  { label: "AUDIO/VIDEO", originX: 550, icon: Play },
+  { label: "DATABASES", originX: 700, icon: Database },
 ];
 
 export function DataFunnel({ className }: { className?: string }) {
@@ -66,13 +67,25 @@ export function DataFunnel({ className }: { className?: string }) {
                 className="opacity-40"
               />
 
+              {/* Source Icon */}
+              <foreignObject
+                x={stream.originX - 12}
+                y="20"
+                width="24"
+                height="24"
+              >
+                <div className="flex items-center justify-center text-[#AFA9EC]">
+                  <stream.icon size={18} strokeWidth={2.5} />
+                </div>
+              </foreignObject>
+
               {/* Source Label */}
               <text
                 x={stream.originX}
-                y="60"
+                y="65"
                 textAnchor="middle"
                 fill="#AFA9EC"
-                className="text-[12px] font-bold tracking-widest uppercase"
+                className="text-[10px] font-bold tracking-widest uppercase"
                 style={{ letterSpacing: "0.1em" }}
               >
                 {stream.label}
