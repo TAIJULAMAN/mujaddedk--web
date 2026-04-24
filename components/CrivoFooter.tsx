@@ -20,7 +20,7 @@ const LinkedinIcon = ({ size = 24, ...props }: any) => (
 export default function CrivoFooter() {
   return (
     <footer
-      className="bg-white border-t border-slate-200 pt-20 pb-12 relative overflow-hidden font-sans"
+      className="bg-white border-t border-slate-200 pt-24 md:pt-32 pb-12 relative overflow-hidden font-sans"
       id="about"
     >
       {/* Subtle glow effect top aligned */}

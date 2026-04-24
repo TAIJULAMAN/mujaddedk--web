@@ -30,7 +30,7 @@ export default function StripeHero() {
   return (
     <div className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
       <Navbar />
-      <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-36 md:pb-48">
+      <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
           {/* Left Column: Text Content */}
           <motion.div
@@ -96,7 +96,7 @@ export default function StripeHero() {
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
             className="relative h-[500px] w-full flex flex-col items-center justify-center lg:items-end z-10"
           >
-            <div className="w-[120%] h-[120%] lg:w-[150%] lg:h-[130%] lg:-mr-12 xl:-mr-24 pointer-events-none select-none">
+            <div className="w-[120%] h-[120%] lg:w-[150%] pt-0 lg:pt-22 lg:h-[130%] lg:-mr-12 xl:-mr-24 pointer-events-none select-none">
               <DataFunnel />
             </div>
           </motion.div>

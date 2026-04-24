@@ -19,7 +19,7 @@ export default function CrivoCTA() {
     <section
       id="demo"
       ref={containerRef}
-      className="relative py-28 md:py-40 bg-slate-50 overflow-hidden flex items-center justify-center font-sans"
+      className="relative py-24 md:py-32 bg-slate-50 overflow-hidden flex items-center justify-center font-sans"
     >
       {/* Animated Glowing Orbs (Softened for Light Mode) */}
       <motion.div

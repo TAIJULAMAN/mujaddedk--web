@@ -13,8 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Stripe – Financial Infrastructure for the Internet",
-  description: "Stripe is a suite of APIs powering online payment processing and commerce solutions for internet businesses of all sizes.",
+  title: "crivo",
+  description: "eDiscovery without the guesswork.",
+  icons: {
+    icon: "/crivo.png",
+  },
 };
 
 export default function RootLayout({
