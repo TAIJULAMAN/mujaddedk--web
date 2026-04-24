@@ -77,7 +77,7 @@ export default function CrivoCTA() {
                 <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3478F6] opacity-75"></span>
                 <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3478F6]"></span>
               </span>
-              Start your free trial
+              BOOK A DEMO
             </motion.div>
 
             <motion.h2 
@@ -87,7 +87,7 @@ export default function CrivoCTA() {
               transition={{ delay: 0.3 }}
               className="text-[34px] sm:text-[46px] md:text-[56px] font-[800] text-[#0A2540] leading-[1.1] tracking-tight mb-6 max-w-[800px]"
             >
-              Ready to give your firm a genuine advantage in discovery?
+              Ready to run your next matter on Crivo?
             </motion.h2>
             
             <motion.p
@@ -95,10 +95,10 @@ export default function CrivoCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.4 }}
-              className="text-[#425466] text-[16px] md:text-[18px] font-medium leading-relaxed max-w-[550px] mx-auto mb-12"
+              className="text-[#425466] text-[16px] md:text-[18px] font-medium leading-relaxed max-w-[650px] mx-auto mb-12"
             >
               See a live demonstration with your own documents — not a scripted demo. 
-              Fourteen days to evaluate on a real matter, no credit card required.
+              Evaluate Crivo on a real matter before you commit.
             </motion.p>
             
             <motion.div
