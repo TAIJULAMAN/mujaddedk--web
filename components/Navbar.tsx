@@ -27,10 +27,8 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: "Platform", active: true, href: "#" },
-    { name: "Solutions", active: false, href: "#solutions" },
-    // { name: "Pricing", active: false, href: "#pricing" },
-    { name: "Docs", active: false, href: "#" },
+    { name: "Platform", active: true, href: "#features" },
+    { name: "Pricing", active: false, href: "#pricing" },
     { name: "About", active: false, href: "#about" },
   ];
 
@@ -72,9 +70,9 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3">
-            <button className="hidden md:block px-[18px] py-[8px] rounded-full text-[15px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-200">
+            {/* <button className="hidden md:block px-[18px] py-[8px] rounded-full text-[15px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-200">
               Sign in
-            </button>
+            </button> */}
             <Link
               href="#demo"
               className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]"
@@ -147,9 +145,9 @@ export default function Navbar() {
               </div>
 
               <div className="p-5 border-t border-slate-100 flex flex-col gap-3">
-                <button className="w-full px-[18px] py-[12px] rounded-xl text-[15px] font-bold text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all duration-200">
+                {/* <button className="w-full px-[18px] py-[12px] rounded-xl text-[15px] font-bold text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all duration-200">
                   Sign in
-                </button>
+                </button> */}
                 <Link
                   href="#demo"
                   onClick={() => setMobileMenuOpen(false)}

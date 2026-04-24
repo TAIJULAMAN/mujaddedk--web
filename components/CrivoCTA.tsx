@@ -10,7 +10,6 @@ export default function CrivoCTA() {
   const items = [
     "Boutique Litigation",
     "AmLaw 200",
-    "Government Agencies",
     "Corporate Legal",
     "International Arbitration",
     "Legal Service Providers"
