@@ -663,8 +663,8 @@ function ViewMockup() {
 
 function EmailMockup() {
   const nodes = Array.from({ length: 20 }).map((_, i) => ({
-    x: 10 + ((Math.sin(i * 1234.567) + 1) / 2) * 80,
-    y: 10 + ((Math.cos(i * 7654.321) + 1) / 2) * 80,
+    x: Math.round((10 + ((Math.sin(i * 1234.567) + 1) / 2) * 80) * 1000) / 1000,
+    y: Math.round((10 + ((Math.cos(i * 7654.321) + 1) / 2) * 80) * 1000) / 1000,
     size: 2 + ((i * 3) % 5),
   }));
   return (

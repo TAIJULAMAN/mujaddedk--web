@@ -8,61 +8,31 @@ const steps = [
     number: "01",
     title: "Collect & Ingest",
     description:
-      "Upload PST archives, drag-and-drop native files, or connect to cloud sources. Every file processed by Crivo's proprietary extraction layer — no external processing service, no format that can't be read.",
-    tags: [
-      "PST / OST / MSG",
-      "EML threads",
-      "40+ file formats",
-      "Load file import",
-    ],
+      "Upload PST archives, drag-and-drop native files, or connect to cloud sources. Every file processed by Crivo's proprietary extraction layer - no external processing service, no format that can't be read.",
   },
   {
     number: "02",
     title: "Early Case Assessment",
     description:
       "Search your entire corpus the moment processing completes. Filter by custodian, date, file type, language, detected speaker, or any of 35 matter intelligence fields. Identify key documents before review begins.",
-    tags: [
-      "Full-text search",
-      "Metadata filters",
-      "Saved searches",
-      "ECA analytics",
-    ],
   },
   {
     number: "03",
     title: "Document Review",
     description:
-      "Code responsiveness, privilege, and issues in a single interface. Every document rendered exactly as created — presentations with charts, spreadsheets with formulas, recordings with synchronized transcripts. In-platform commenting. Team annotation sharing.",
-    tags: [
-      "Native rendering",
-      "Privilege logging",
-      "Batch coding",
-      "Team collaboration",
-    ],
+      "Code responsiveness, privilege, and issues in a single interface. Every document rendered exactly as created - presentations with charts, spreadsheets with formulas, recordings with synchronized transcripts. In-platform commenting. Team annotation sharing.",
   },
   {
     number: "04",
     title: "Redact & Sanitize",
     description:
-      "Manual selection, automated pattern matching, or AI-assisted PII detection — all three available in the same matter. Burn-in redactions permanently with reason codes. Then sanitize every production document to remove hidden data opposing counsel should never see.",
-    tags: [
-      "Burn-in redaction",
-      "PII patterns",
-      "Reason codes",
-      "Metadata sweep",
-    ],
+      "Manual selection, automated pattern matching, or AI-assisted PII detection - all three available in the same matter. Burn-in redactions permanently with reason codes. Then sanitize every production document to remove hidden data opposing counsel should never see.",
   },
   {
     number: "05",
     title: "Produce",
     description:
       "Generate production sets with Bates numbering, slip sheets, and load files. Export in TIFF, PDF, or native format. Every production timestamped, logged, and auditable. No questions from opposing counsel that you can't answer with documentation.",
-    tags: [
-      "Bates numbering",
-      "DAT / OPT / CSV",
-      "TIFF / PDF / Native",
-      "Audit trail",
-    ],
   },
 ];
 
@@ -77,7 +47,7 @@ export default function CrivoAbout() {
     >
       <div className="max-w-[1200px] mx-auto px-6 md:px-8">
         {/* Header Section */}
-        <div className="max-w-3xl mb-16 md:mb-24">
+        <div className="max-w-4xl mb-16 md:mb-24">
           <motion.h4
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -95,25 +65,24 @@ export default function CrivoAbout() {
           >
             Every stage of discovery.
             <br />
-            Nothing handed off to another vendor.
+            Nothing handed off to another platform.
           </motion.h2>
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[18px] md:text-[20px] text-slate-500 font-medium leading-relaxed max-w-2xl"
+            className="text-[18px] md:text-[20px] text-slate-500 font-medium leading-relaxed max-w-3xl"
           >
             From first custodian interview to final production, Crivo handles
-            the complete EDRM workflow — no vendor juggling, no data migration,
-            no re-ingestion fees.
+            the complete EDRM workflow — no platform juggling, no data migration,
+            all in one.
           </motion.p>
         </div>
 
-        {/* Main Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20">
-          {/* Left Column - Steps */}
-          <div className="lg:col-span-7 relative">
+        <div className="max-w-4xl">
+          {/* Steps */}
+          <div className="relative">
             {/* The continuous vertical line */}
             <div className="absolute left-[20px] top-[24px] bottom-0 w-[1px] bg-slate-200" />
 
@@ -137,21 +106,9 @@ export default function CrivoAbout() {
                     <h3 className="text-[20px] font-bold text-[#0A2540] mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-[15px] text-slate-500 leading-relaxed mb-5">
+                    <p className="text-[15px] text-slate-500 leading-relaxed">
                       {step.description}
                     </p>
-
-                    {/* Tags */}
-                    <div className="flex flex-wrap gap-2">
-                      {step.tags.map((tag, tagIndex) => (
-                        <span
-                          key={tagIndex}
-                          className="px-3 py-1 bg-white border border-slate-200 rounded-md text-[11px] font-bold text-slate-500 uppercase tracking-wide hover:border-slate-300 transition-colors"
-                        >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
                   </div>
 
                   {/* Divider line between steps (except last one) */}
@@ -160,60 +117,6 @@ export default function CrivoAbout() {
                   )}
                 </motion.div>
               ))}
-            </div>
-          </div>
-
-          {/* Right Column - Cards */}
-          <div className="lg:col-span-5 relative">
-            <div className="sticky top-32 space-y-6">
-              {/* Dark Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="bg-[#0B1527] rounded-[24px] p-8 md:p-10 shadow-xl overflow-hidden relative group border border-slate-800"
-              >
-                {/* Decorative glowing orb in the card */}
-                <div className="absolute -top-24 -right-24 w-48 h-48 bg-[#0066FF] opacity-20 blur-[60px] rounded-full group-hover:opacity-40 group-hover:scale-150 transition-all duration-700" />
-
-                <h4 className="text-white text-[20px] font-bold mb-4 relative z-10">
-                  The billing problem, solved.
-                </h4>
-                <p className="text-slate-400 text-[14px] leading-relaxed mb-10 relative z-10">
-                  Crivo's per-seat pricing means you know the cost before the
-                  matter starts. Pass a predictable line item to your client —
-                  not an estimate that triples when the data volume does.
-                </p>
-                <div className="flex items-end gap-3 relative z-10">
-                  <span className="text-[#3b82f6] text-[48px] font-bold leading-none">
-                    $0
-                  </span>
-                  <span className="text-slate-400 text-[13px] font-medium leading-tight pb-2">
-                    Data overage fees,
-                    <br />
-                    ever.
-                  </span>
-                </div>
-              </motion.div>
-
-              {/* Light Green Card */}
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: 0.1 }}
-                className="bg-[#eefcf2] border border-[#d1f4df] rounded-[24px] p-8 md:p-10 shadow-sm"
-              >
-                <h4 className="text-[#105934] text-[18px] font-bold mb-4">
-                  On-premise option for restricted matters
-                </h4>
-                <p className="text-[#2F6D4A] text-[14px] leading-relaxed opacity-90">
-                  Government clients, financial institutions, and regulated
-                  industries requiring strict data residency? Crivo deploys
-                  entirely within your infrastructure — no cloud dependency
-                  required.
-                </p>
-              </motion.div>
             </div>
           </div>
         </div>
