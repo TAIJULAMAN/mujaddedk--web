@@ -1,11 +1,12 @@
 import StripeHero from "@/components/StripeHero";
 // import CrivoPricing from "@/components/CrivoPricing";
 // import StripeSessions from "@/components/StripeSessions";
-import StripeGlobalScale from "@/components/StripeGlobalScale";
+// import StripeGlobalScale from "@/components/StripeGlobalScale";
 import CrivoCTA from "@/components/CrivoCTA";
 import CrivoFooter from "@/components/CrivoFooter";
 import StripeProducts from "@/components/StripeProducts";
 import CrivoAbout from "@/components/CrivoAbout";
+import StripePricing from "@/components/StripePricing";
 
 export default function Home() {
   return (
@@ -13,9 +14,9 @@ export default function Home() {
       <StripeHero />
       <StripeProducts />
       <CrivoAbout />
-      {/* <CrivoPricing /> */}
+      <StripePricing />
       {/* <StripeSessions /> */}
-      <StripeGlobalScale />
+      {/* <StripeGlobalScale /> */}
       <CrivoCTA />
       <CrivoFooter />
     </>
