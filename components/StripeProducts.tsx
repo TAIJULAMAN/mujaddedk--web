@@ -39,7 +39,7 @@ const features = [
   {
     step: "01 / INGEST",
     title: "CrivoExtract",
-    desc: "Native extraction from DOCX, XLSX, PDF, EML, MSG, HTML, TXT, RTF, ODS. Metadata, page counts, word counts — all extracted in a single pass.",
+    desc: "Native extraction from DOCX, XLSX, PDF, EML, MSG, HTML, and more. Metadata, page counts, and word counts pulled automatically - no manual prep required.",
     badge: "NATIVE ENGINE",
     badgeType: "teal",
     colSpan: "col-span-12 lg:col-span-7",
@@ -49,7 +49,7 @@ const features = [
   {
     step: "02 / RENDER",
     title: "CrivoConverter",
-    desc: "DOCX, XLSX, PPTX, HTML, and email formats converted to PDF on-server via pure Python pipeline. Sub-second conversion. No external API calls.",
+    desc: "Converts DOCX, XLSX, PPTX, HTML, and email formats to PDF on-server. Fast, consistent output - no third-party dependencies or conversion errors.",
     badge: "NATIVE ENGINE",
     badgeType: "teal",
     colSpan: "col-span-12 lg:col-span-5",
@@ -59,7 +59,7 @@ const features = [
   {
     step: "03 / VIEW",
     title: "CrivoImager",
-    desc: "PDF pages rendered to JPEG at any DPI using PyMuPDF. Supports TIFF, BMP, WebP passthrough natively.",
+    desc: "Renders document pages for fast, high-quality viewing — no plugins, no lag.",
     badge: "NATIVE ENGINE",
     badgeType: "teal",
     colSpan: "col-span-12 md:col-span-4",
@@ -69,7 +69,7 @@ const features = [
   {
     step: "04 / EMAIL",
     title: "CrivoPSTExtract",
-    desc: "Parallel PST/OST/MSG extraction with thread ID linking and custodian mapping. Terabyte-scale capable.",
+    desc: "Extracts PST, OST, and MSG files with full custodian mapping — handles large volumes without breaking a sweat.",
     badge: "NATIVE ENGINE",
     badgeType: "teal",
     colSpan: "col-span-12 md:col-span-4",
@@ -79,7 +79,7 @@ const features = [
   {
     step: "05 / REVIEW",
     title: "CrivoView",
-    desc: "Word, Excel, PPTX, PDF, email, image — one viewer, zero plugins. SheetJS for spreadsheets, dark mode included.",
+    desc: "Word, Excel, PPTX, PDF, email, and images — one viewer, zero plugins, no installs required.",
     badge: "NATIVE VIEWER",
     badgeType: "teal",
     colSpan: "col-span-12 md:col-span-4",
@@ -88,9 +88,9 @@ const features = [
   },
   {
     step: "06 / SEARCH",
-    title: "Full-Text Index",
-    desc: "Every extracted word indexed in OpenSearch. Keyword search, fuzzy matching, regular expressions, field-level filters. Saved searches with cross-workspace alerts.",
-    badge: "OPENSEARCH",
+    title: "Full-Text Search",
+    desc: "Keyword search, fuzzy matching, and saved searches across your entire document set — with field-level filters and instant alerts.",
+    badge: "",
     badgeType: "teal",
     colSpan: "col-span-12 lg:col-span-8",
     height: "h-[420px]",
@@ -99,8 +99,8 @@ const features = [
   {
     step: "07 / REDACT",
     title: "CrivoRedact 2.0",
-    desc: "Pattern-based (SSN, EIN, email) and AI-assisted redaction. Permanent burn-in via PyMuPDF with audit trail.",
-    badge: "NEW IN S40",
+    desc: "Pattern-based redaction for SSN, EIN, email, and more — plus AI-assisted review. Every redaction logged with a full audit trail.",
+    badge: "NEW",
     badgeType: "orange",
     colSpan: "col-span-12 lg:col-span-4",
     height: "h-[420px]",
@@ -109,7 +109,7 @@ const features = [
   {
     step: "08 / PRODUCE",
     title: "Production Engine",
-    desc: "Bates numbering, slip sheet generation, load file export (DAT/OPT/CSV). TIFF, PDF, native. Full chain-of-custody.",
+    desc: "Bates numbering, slip sheet generation, and load file export in DAT/OPT/CSV. TIFF, PDF, and native output. Full chain-of-custody documentation.",
     badge: "COURT-READY",
     badgeType: "teal",
     colSpan: "col-span-12 lg:col-span-6",
@@ -119,8 +119,8 @@ const features = [
   {
     step: "09 / FIELDS",
     title: "Dynamic Field Registry",
-    desc: "35 pre-built review fields across 7 categories — Media, ICR, Redaction, Comments. Fields appear automatically.",
-    badge: "NEW IN S40",
+    desc: "35 pre-built review fields across 7 categories — Media, ICR, Redaction, Comments, and more. Fields populate automatically based on document type.",
+    badge: "",
     badgeType: "orange",
     colSpan: "col-span-12 lg:col-span-6",
     height: "h-[440px]",
@@ -208,11 +208,11 @@ export default function StripeProducts() {
             Platform Features
           </h4>
           <h2 className="text-[28px] md:text-[36px] font-[800] text-[#080E23] leading-tight mb-4 tracking-tight">
-            Everything you need. Nothing you don't.
+            Every file type. One place to review.
           </h2>
           <p className="text-[16px] md:text-[18px] text-slate-500 font-medium leading-relaxed">
-            From ingestion to production, every step runs on native Crivo
-            engines — no licensing fees, no cloud dependencies, no surprises.
+            From collection to production — no hidden licensing costs, no
+            surprises.
           </p>
         </motion.div>
 
@@ -310,15 +310,17 @@ function FeatureCard({ feature, index }: { feature: any; index: number }) {
               {feature.title}
             </h3>
           </div>
-          <span
-            className={`px-2.5 py-1 text-[9px] font-[800] rounded uppercase tracking-wider whitespace-nowrap mt-1 ${
-              feature.badgeType === "teal"
-                ? "bg-[#E6F6EC] text-[#0C8052] shadow-[0_0_10px_rgba(12,128,82,0.1)]"
-                : "bg-[#FFF3E0] text-[#E67B00] shadow-[0_0_10px_rgba(230,123,0,0.1)]"
-            }`}
-          >
-            {feature.badge}
-          </span>
+          {feature.badge && (
+            <span
+              className={`px-2.5 py-1 text-[9px] font-[800] rounded uppercase tracking-wider whitespace-nowrap mt-1 ${
+                feature.badgeType === "teal"
+                  ? "bg-[#E6F6EC] text-[#0C8052] shadow-[0_0_10px_rgba(12,128,82,0.1)]"
+                  : "bg-[#FFF3E0] text-[#E67B00] shadow-[0_0_10px_rgba(230,123,0,0.1)]"
+              }`}
+            >
+              {feature.badge}
+            </span>
+          )}
         </div>
         <p className="text-[13px] text-slate-500 font-medium leading-relaxed max-w-[400px]">
           {feature.desc}
