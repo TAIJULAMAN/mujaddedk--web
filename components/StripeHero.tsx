@@ -4,6 +4,7 @@ import React from "react";
 import { motion, Variants } from "framer-motion";
 import Navbar from "./Navbar";
 import { DataFunnel } from "./ui/data-funnel";
+import Link from "next/link";
 
 // Animation Settings
 const containerVars: Variants = {
@@ -28,7 +29,10 @@ const itemVars: Variants = {
 
 export default function StripeHero() {
   return (
-    <div id="home" className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
+    <div
+      id="home"
+      className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24"
+    >
       <Navbar />
       <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
@@ -74,18 +78,18 @@ export default function StripeHero() {
               variants={itemVars}
               className="flex flex-wrap gap-3 sm:gap-4"
             >
-              <a
-                href="#"
+              <Link
+                href="#contact"
                 className="bg-[#534AB7] hover:bg-[#3C3489] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold flex items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)] active:scale-[0.98] text-[15px] sm:text-[16px]"
               >
                 Get started
-              </a>
-              <a
-                href="#"
+              </Link>
+              <Link
+                href="#demo"
                 className="bg-white border border-slate-200 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-slate-700 hover:border-slate-300 hover:shadow-sm transition-all duration-200 flex items-center active:scale-[0.98] text-[15px] sm:text-[16px]"
               >
                 Request demo
-              </a>
+              </Link>
             </motion.div>
           </motion.div>
 
