@@ -109,7 +109,7 @@ export default function Navbar() {
               Sign in
             </button> */}
             <Link
-              href="#demo"
+              href="#contact"
               className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]"
             >
               Request demo

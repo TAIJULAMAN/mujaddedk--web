@@ -84,12 +84,12 @@ export default function StripeHero() {
               >
                 Get started
               </Link>
-              <Link
+              {/* <Link
                 href="#demo"
                 className="bg-white border border-slate-200 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-slate-700 hover:border-slate-300 hover:shadow-sm transition-all duration-200 flex items-center active:scale-[0.98] text-[15px] sm:text-[16px]"
               >
                 Request demo
-              </Link>
+              </Link> */}
             </motion.div>
           </motion.div>
 

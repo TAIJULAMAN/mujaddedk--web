@@ -1,36 +1,65 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Crivo Legal - B2B SaaS Platform
+
+<div align="center">
+  <h3>eDiscovery without the guesswork.</h3>
+</div>
+
+## Overview
+
+Welcome to the Crivo frontend repository. This project is a modern, high-performance landing page and web application for **Crivo** (crivo.legal), an eDiscovery managed services platform built on transparent pricing and honest technology. 
+
+Originally inspired by elegant, data-rich B2B SaaS interfaces, this platform leverages state-of-the-art web technologies and interactive 3D visualizations to deliver a premium user experience.
+
+## Tech Stack
+
+- **Framework:** [Next.js](https://nextjs.org/)
+- **UI & Components:** [React](https://react.dev/)
+- **Styling:** [Tailwind CSS v4](https://tailwindcss.com/)
+- **Animations:** [Framer Motion](https://www.framer.com/motion/)
+- **3D Graphics:** [Three.js](https://threejs.org/), [React Three Fiber](https://docs.pmnd.rs/react-three-fiber) & [Three Globe](https://github.com/vasturiano/three-globe)
+- **Icons:** [Lucide React](https://lucide.dev/)
+- **Language:** TypeScript
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Installation
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/TAIJULAMAN/mujaddedk--web.git
+   cd mujaddedk--web
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+   *Note: alternatively, you can use `yarn` or `pnpm`.*
 
-## Learn More
+3. Run the development server:
+   ```bash
+   npm run dev
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+4. Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Project Structure
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- `/app`: Next.js App Router entry points (layouts, pages, global CSS).
+- `/components`: Reusable UI elements (`Navbar`, `Footer`, `Hero` sections, interactive 3D components, etc.).
+- `/public`: Static assets (logos, images, and SVGs).
 
-## Deploy on Vercel
+## Available Scripts
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+- `npm run dev`: Starts the local development server.
+- `npm run build`: Compiles and builds the application for production deployment.
+- `npm run start`: Starts a Next.js production server.
+- `npm run lint`: Runs ESLint to check for code quality and issues.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## License
+
+© 2026 Crivo Legal LLC. All rights reserved.
