@@ -28,7 +28,7 @@ const itemVars: Variants = {
 
 export default function StripeHero() {
   return (
-    <div className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
+    <div id="home" className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24">
       <Navbar />
       <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-24 md:pb-32">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">

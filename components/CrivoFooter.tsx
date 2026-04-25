@@ -21,7 +21,6 @@ export default function CrivoFooter() {
   return (
     <footer
       className="bg-white border-t border-slate-200 pt-24 md:pt-32 pb-12 relative overflow-hidden font-sans"
-      id="about"
     >
       {/* Subtle glow effect top aligned */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>

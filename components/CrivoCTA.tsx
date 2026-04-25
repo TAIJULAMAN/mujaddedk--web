@@ -17,7 +17,7 @@ export default function CrivoCTA() {
 
   return (
     <section
-      id="demo"
+      id="contact"
       ref={containerRef}
       className="relative py-24 md:py-32 bg-slate-50 overflow-hidden flex items-center justify-center font-sans"
     >
@@ -58,6 +58,7 @@ export default function CrivoCTA() {
           whileInView={{ opacity: 1, y: 0, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          id="demo"
           className="w-full relative rounded-3xl md:rounded-[40px] border border-slate-200 bg-white/70 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
         >
           {/* Subtle top border gradient */}

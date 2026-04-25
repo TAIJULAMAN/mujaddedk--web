@@ -189,7 +189,7 @@ function AnimatedGridBackground() {
 
 export default function StripeProducts() {
   return (
-    <section id="solutions" className="relative py-24 md:py-32 overflow-hidden">
+    <section id="features" className="relative py-24 md:py-32 overflow-hidden">
       <AnimatedGridBackground />
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
         {/* Section Header */}
