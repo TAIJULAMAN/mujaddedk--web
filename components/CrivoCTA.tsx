@@ -17,7 +17,6 @@ export default function CrivoCTA() {
 
   return (
     <section
-      id="contact"
       ref={containerRef}
       className="relative py-24 md:py-32 bg-slate-50 overflow-hidden flex items-center justify-center font-sans"
     >

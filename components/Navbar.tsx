@@ -6,15 +6,42 @@ import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function Navbar() {
+  const [activeLink, setActiveLink] = useState("home");
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 20);
+      if (window.scrollY < 100) setActiveLink("home");
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  useEffect(() => {
+    const observerOptions = {
+      root: null,
+      rootMargin: "-100px 0px -40% 0px",
+      threshold: 0,
+    };
+
+    const handleIntersection = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          setActiveLink(entry.target.id);
+        }
+      });
+    };
+
+    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const sections = ["home", "features", "about", "contact"];
+    sections.forEach((id) => {
+      const section = document.getElementById(id);
+      if (section) observer.observe(section);
+    });
+
+    return () => observer.disconnect();
   }, []);
 
   // Prevent scrolling when mobile menu is open
@@ -27,10 +54,10 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: "Home", active: true, href: "/" },
-    { name: "Platform", active: false, href: "#features" },
-    { name: "About", active: false, href: "#about" },
-    { name: "Contact Us", active: false, href: "#contact" },
+    { name: "Home", active: activeLink === "home", href: "#home" },
+    { name: "Platform", active: activeLink === "features", href: "#features" },
+    { name: "About", active: activeLink === "about", href: "#about" },
+    { name: "Contact Us", active: activeLink === "contact", href: "#contact" },
   ];
 
   return (
