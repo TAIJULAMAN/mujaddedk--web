@@ -116,7 +116,7 @@ export default function CrivoCTA() {
               </button>
 
               {/* Secondary Premium Button */}
-              <a
+              {/* <a
                 href="#pricing"
                 className="w-full sm:w-auto bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-slate-50 shadow-sm"
               >
@@ -125,7 +125,7 @@ export default function CrivoCTA() {
                   size={16}
                   className="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1.5 transition-all duration-300"
                 />
-              </a>
+              </a> */}
             </motion.div>
           </div>
 

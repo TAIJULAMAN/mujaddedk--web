@@ -12,7 +12,7 @@ export default function Home() {
       <StripeHero />
       <StripeProducts />
       <CrivoAbout />
-      <StripePricing />
+      {/* <StripePricing /> */}
       <CrivoCTA />
       <CrivoContact />
       <CrivoFooter />

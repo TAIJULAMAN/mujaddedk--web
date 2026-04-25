@@ -2,6 +2,7 @@
 
 import React from "react";
 import Link from "next/link";
+import Image from "next/image";
 
 const LinkedinIcon = ({ size = 24, ...props }: any) => (
   <svg
@@ -19,9 +20,7 @@ const LinkedinIcon = ({ size = 24, ...props }: any) => (
 
 export default function CrivoFooter() {
   return (
-    <footer
-      className="bg-white border-t border-slate-200 pt-24 md:pt-32 pb-12 relative overflow-hidden font-sans"
-    >
+    <footer className="bg-white border-t border-slate-200 pt-24 md:pt-32 pb-12 relative overflow-hidden font-sans">
       {/* Subtle glow effect top aligned */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
 
@@ -29,13 +28,16 @@ export default function CrivoFooter() {
         <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-20">
           {/* Left — Logo & Descriptor */}
           <div className="max-w-md">
-            <Link
-              href="/"
-              className="flex items-baseline gap-[2px] text-[22px] font-[800] tracking-[-0.02em] text-black select-none"
-            >
-              crivo<span className="text-[#534AB7] align-baseline">.</span>legal
+            <Link href="/" className="flex items-center select-none pt-1">
+              <Image
+                src="/crivo.png"
+                alt="crivo.legal"
+                width={220}
+                height={60}
+                className="h-10 w-auto object-contain"
+              />
             </Link>
-            <p className="text-slate-600 text-[16px] leading-relaxed max-w-[340px] font-medium">
+            <p className="text-slate-600 text-[16px] pt-5 leading-relaxed max-w-[340px] font-medium">
               eDiscovery managed services built on transparent pricing and
               honest technology.
             </p>

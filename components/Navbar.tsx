@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
@@ -34,7 +35,10 @@ export default function Navbar() {
       });
     };
 
-    const observer = new IntersectionObserver(handleIntersection, observerOptions);
+    const observer = new IntersectionObserver(
+      handleIntersection,
+      observerOptions,
+    );
     const sections = ["home", "features", "about", "contact"];
     sections.forEach((id) => {
       const section = document.getElementById(id);
@@ -44,7 +48,6 @@ export default function Navbar() {
     return () => observer.disconnect();
   }, []);
 
-  // Prevent scrolling when mobile menu is open
   useEffect(() => {
     if (mobileMenuOpen) {
       document.body.style.overflow = "hidden";
@@ -72,11 +75,15 @@ export default function Navbar() {
         <div className="max-w-[1400px] mx-auto flex items-center justify-between">
           <div className="flex items-center gap-8 lg:gap-12">
             {/* Logo */}
-            <Link
-              href="/"
-              className="flex items-baseline gap-[2px] text-[22px] font-[800] tracking-[-0.02em] text-black select-none"
-            >
-              crivo<span className="text-[#534AB7] align-baseline">.</span>legal
+            <Link href="/" className="flex items-center select-none pt-1">
+              <Image
+                src="/crivo.png"
+                alt="crivo.legal"
+                width={220}
+                height={60}
+                className="h-10 w-auto object-contain"
+                priority
+              />
             </Link>
 
             {/* Desktop Links */}
@@ -141,11 +148,16 @@ export default function Navbar() {
               <div className="p-5 flex items-center justify-between border-b border-slate-100">
                 <Link
                   href="/"
-                  className="flex items-baseline gap-[2px] text-[20px] font-[800] tracking-[-0.02em] text-black select-none"
+                  className="flex items-center select-none pt-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
-                  crivo<span className="text-[#534AB7] align-baseline">.</span>
-                  legal
+                  <Image
+                    src="/crivo.png"
+                    alt="crivo.legal"
+                    width={110}
+                    height={30}
+                    className="h-7 w-auto object-contain"
+                  />
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}

@@ -13,10 +13,11 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "crivo",
+  title: "Crivo",
   description: "eDiscovery without the guesswork.",
   icons: {
-    icon: "/crivo.png",
+    icon: [{ url: "/crivo2.png", sizes: "192x192", type: "image/png" }],
+    apple: [{ url: "/crivo2.png", sizes: "180x180", type: "image/png" }],
   },
 };
 
