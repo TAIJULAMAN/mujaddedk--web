@@ -27,9 +27,10 @@ export default function Navbar() {
   }, [mobileMenuOpen]);
 
   const navLinks = [
-    { name: "Platform", active: true, href: "#features" },
-    { name: "Pricing", active: false, href: "#pricing" },
+    { name: "Home", active: true, href: "/" },
+    { name: "Platform", active: false, href: "#features" },
     { name: "About", active: false, href: "#about" },
+    { name: "Contact Us", active: false, href: "#contact" },
   ];
 
   return (
