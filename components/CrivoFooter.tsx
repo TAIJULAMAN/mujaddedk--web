@@ -20,12 +20,12 @@ const LinkedinIcon = ({ size = 24, ...props }: any) => (
 
 export default function CrivoFooter() {
   return (
-    <footer className="bg-white border-t border-slate-200 pt-24 md:pt-32 pb-12 relative overflow-hidden font-sans">
+    <footer className="bg-white pt-10 md:pt-16 pb-10 md:pb-16 relative overflow-hidden font-sans">
       {/* Subtle glow effect top aligned */}
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-[1px] bg-gradient-to-r from-transparent via-slate-200 to-transparent"></div>
 
       <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
-        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-20">
+        <div className="flex flex-col lg:flex-row justify-between items-start gap-12 mb-10 md:mb-16">
           {/* Left — Logo & Descriptor */}
           <div className="max-w-md">
             <Link href="/" className="flex items-center select-none pt-1">
@@ -37,7 +37,7 @@ export default function CrivoFooter() {
                 className="h-10 w-auto object-contain"
               />
             </Link>
-            <p className="text-slate-600 text-[16px] pt-5 leading-relaxed max-w-[340px] font-medium">
+            <p className="text-textSecondary text-[16px] pt-5 leading-relaxed max-w-[340px] font-medium">
               eDiscovery managed services built on transparent pricing and
               honest technology.
             </p>
@@ -54,7 +54,7 @@ export default function CrivoFooter() {
               <a
                 key={link.name}
                 href={link.href}
-                className="text-[15px] font-bold text-[#0A2540] hover:text-[#3478F6] transition-colors"
+                className="text-[15px] font-bold text-chromeDark hover:text-primary transition-colors"
               >
                 {link.name}
               </a>
@@ -67,7 +67,7 @@ export default function CrivoFooter() {
               href="https://linkedin.com/company/crivo"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-2xl bg-slate-100 flex items-center justify-center text-slate-500 hover:bg-[#0077B5] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
+              className="w-12 h-12 rounded-2xl bg-surfaceSunken flex items-center justify-center text-textSecondary hover:bg-[#0077B5] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
             >
               <LinkedinIcon size={22} />
             </a>
@@ -75,31 +75,31 @@ export default function CrivoFooter() {
         </div>
 
         {/* Bottom bar */}
-        <div className="border-t border-slate-100 pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
-          <div className="flex gap-4 items-center bg-slate-50 px-4 py-2 rounded-full border border-slate-100">
+        <div className="border-t border-divider pt-10 flex flex-col md:flex-row justify-between items-center gap-6">
+          <div className="flex gap-4 items-center bg-surfaceSunken px-4 py-2 rounded-full border border-divider">
             <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-            <span className="text-[12px] text-slate-600 font-bold uppercase tracking-wider">
+            <span className="text-[12px] text-textSecondary font-bold uppercase tracking-wider">
               All systems operational
             </span>
           </div>
 
           <div className="flex flex-col md:flex-row items-center gap-6">
-            <div className="flex items-center space-x-8">
-              <a
+            {/* <div className="flex items-center space-x-8">
+              <Link
                 href="#"
-                className="text-[13px] text-slate-500 hover:text-slate-900 font-bold transition-colors"
+                className="text-[13px] text-textSecondary hover:text-textPrimary font-bold transition-colors"
               >
                 Privacy Policy
-              </a>
-              <a
+              </Link>
+              <Link
                 href="#"
-                className="text-[13px] text-slate-500 hover:text-slate-900 font-bold transition-colors"
+                className="text-[13px] text-textSecondary hover:text-textPrimary font-bold transition-colors"
               >
                 Terms of Service
-              </a>
-            </div>
+              </Link>
+            </div> */}
 
-            <p className="text-[13px] text-slate-400 font-medium">
+            <p className="text-[13px] text-textTertiary font-medium">
               © 2026 Crivo Legal LLC. All rights reserved.
             </p>
           </div>

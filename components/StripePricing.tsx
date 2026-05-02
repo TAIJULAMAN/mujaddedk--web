@@ -59,13 +59,13 @@ const enterpriseFeatures = [
 
 function FeatureList({ features }: { features: string[] }) {
   return (
-    <ul className="flex flex-col mb-8 text-[14px] text-slate-600 font-medium">
+    <ul className="flex flex-col mb-8 text-[14px] text-textSecondary font-medium">
       {features.map((feature, i) => (
         <li
           key={i}
-          className="flex items-start gap-3 py-3.5 border-b border-slate-100 last:border-b-0"
+          className="flex items-start gap-3 py-3.5 border-b border-divider last:border-b-0"
         >
-          <div className="mt-[2px] shrink-0 text-[#534AB7]">
+          <div className="mt-[2px] shrink-0 text-primary">
             <svg
               width="14"
               height="14"
@@ -103,20 +103,20 @@ export default function CrivoPricing() {
         >
           <motion.h4
             variants={itemVars}
-            className="text-[12px] font-bold text-[#534AB7] tracking-[0.16em] uppercase mb-6"
+            className="text-[12px] font-bold text-primary tracking-[0.16em] uppercase mb-6"
           >
             PRICING
           </motion.h4>
           <motion.h2
             variants={itemVars}
-            className="text-[36px] sm:text-[44px] md:text-[50px] leading-[1.1] font-bold text-black font-serif tracking-tight mb-6"
+            className="text-[36px] sm:text-[44px] md:text-[50px] leading-[1.1] font-bold text-textPrimary font-serif tracking-tight mb-6"
           >
             One price. No surprises. <br className="hidden sm:block" />
             Tell your client before you start.
           </motion.h2>
           <motion.p
             variants={itemVars}
-            className="text-[16px] sm:text-[18px] text-slate-500 font-medium leading-[1.6]"
+            className="text-[16px] sm:text-[18px] text-textSecondary font-medium leading-[1.6]"
           >
             Crivo charges per reviewer, not per gigabyte. The cost you see is
             the cost you pay — and the cost you can quote.
@@ -134,17 +134,17 @@ export default function CrivoPricing() {
           {/* Card 1: Essentials */}
           <motion.div
             variants={itemVars}
-            className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
+            className="bg-white border border-divider rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
           >
-            <div className="mb-8 border-b border-slate-100 pb-8">
-              <h3 className="text-[12px] font-bold text-[#3478F6] tracking-[0.1em] uppercase mb-4">
+            <div className="mb-8 border-b border-divider pb-8">
+              <h3 className="text-[12px] font-bold text-primary tracking-[0.1em] uppercase mb-4">
                 ESSENTIALS
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-textPrimary">
                   $149
                 </span>
-                <span className="text-[14px] text-slate-400 font-medium">
+                <span className="text-[14px] text-textTertiary font-medium">
                   /user/mo
                 </span>
               </div>
@@ -159,10 +159,10 @@ export default function CrivoPricing() {
             </div>
 
             <div className="mt-auto pt-2">
-              <button className="w-full bg-white border-2 border-black text-black font-bold text-[15px] py-3.5 rounded-lg hover:bg-slate-50 transition-colors">
+              <button className="w-full bg-white border-2 border-black text-textPrimary font-bold text-[15px] py-3.5 rounded-lg hover:bg-surfaceSunken transition-colors">
                 Start 14-Day Trial
               </button>
-              <p className="text-[11px] text-center text-slate-400 mt-4 font-medium">
+              <p className="text-[11px] text-center text-textTertiary mt-4 font-medium">
                 No credit card required
               </p>
             </div>
@@ -180,15 +180,15 @@ export default function CrivoPricing() {
               </div>
             </div>
 
-            <div className="mb-8 border-b border-slate-100 pb-8 mt-2">
-              <h3 className="text-[12px] font-bold text-[#3478F6] tracking-[0.1em] uppercase mb-4">
+            <div className="mb-8 border-b border-divider pb-8 mt-2">
+              <h3 className="text-[12px] font-bold text-primary tracking-[0.1em] uppercase mb-4">
                 PROFESSIONAL
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-textPrimary">
                   $349
                 </span>
-                <span className="text-[14px] text-slate-400 font-medium">
+                <span className="text-[14px] text-textTertiary font-medium">
                   /user/mo
                 </span>
               </div>
@@ -206,7 +206,7 @@ export default function CrivoPricing() {
               <button className="w-full bg-[#111827] hover:bg-[#1f2937] text-white font-bold text-[15px] py-3.5 rounded-lg transition-colors shadow-lg shadow-slate-900/20 hover:-translate-y-0.5 active:translate-y-0">
                 Start 14-Day Trial
               </button>
-              <p className="text-[11px] text-center text-slate-400 mt-4 font-medium">
+              <p className="text-[11px] text-center text-textTertiary mt-4 font-medium">
                 No credit card required
               </p>
             </div>
@@ -215,14 +215,14 @@ export default function CrivoPricing() {
           {/* Card 3: Enterprise */}
           <motion.div
             variants={itemVars}
-            className="bg-white border border-slate-200 rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
+            className="bg-white border border-divider rounded-2xl p-8 lg:p-10 flex flex-col h-full lg:mt-6 transition-all hover:shadow-lg"
           >
-            <div className="mb-8 border-b border-slate-100 pb-8">
-              <h3 className="text-[12px] font-bold text-[#3478F6] tracking-[0.1em] uppercase mb-4">
+            <div className="mb-8 border-b border-divider pb-8">
+              <h3 className="text-[12px] font-bold text-primary tracking-[0.1em] uppercase mb-4">
                 ENTERPRISE
               </h3>
               <div className="flex items-baseline gap-1 mb-3">
-                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-black">
+                <span className="text-[44px] font-[800] leading-none tracking-[-0.03em] text-textPrimary">
                   Custom
                 </span>
               </div>
@@ -237,10 +237,10 @@ export default function CrivoPricing() {
             </div>
 
             <div className="mt-auto pt-2">
-              <button className="w-full bg-white border-2 border-black text-black font-bold text-[15px] py-3.5 rounded-lg hover:bg-slate-50 transition-colors">
+              <button className="w-full bg-white border-2 border-black text-textPrimary font-bold text-[15px] py-3.5 rounded-lg hover:bg-surfaceSunken transition-colors">
                 Talk to Sales
               </button>
-              <p className="text-[11px] text-center text-slate-400 mt-4 font-medium">
+              <p className="text-[11px] text-center text-textTertiary mt-4 font-medium">
                 Volume discounts available
               </p>
             </div>

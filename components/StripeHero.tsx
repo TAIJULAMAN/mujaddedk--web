@@ -31,7 +31,7 @@ export default function StripeHero() {
   return (
     <div
       id="home"
-      className="relative w-full bg-white overflow-hidden font-sans selection:bg-[#EEEDFE] selection:text-[#534AB7] pt-24"
+      className="relative w-full bg-white overflow-hidden font-sans selection:bg-primary/20 selection:text-primary pt-24"
     >
       <Navbar />
       <main className="relative z-10 max-w-[1400px] mx-auto px-5 md:px-0 pt-10 md:pt-20 pb-24 md:pb-32">
@@ -48,8 +48,8 @@ export default function StripeHero() {
               variants={itemVars}
               className="flex items-center gap-2 mb-7"
             >
-              <div className="w-2 h-2 rounded-full bg-[#534AB7]" />
-              <span className="text-[12px] font-bold text-[#534AB7] tracking-[0.1em] uppercase">
+              <div className="w-2 h-2 rounded-full bg-primary" />
+              <span className="text-[12px] font-bold text-[#3B5876] tracking-[0.1em] uppercase">
                 NOW ONBOARDING LAW FIRMS
               </span>
             </motion.div>
@@ -57,17 +57,17 @@ export default function StripeHero() {
             {/* Title */}
             <motion.h1
               variants={itemVars}
-              className="text-[48px] sm:text-[58px] md:text-[70px] lg:text-[78px] leading-[1.08] font-[800] tracking-[-0.035em] mb-7 text-black"
+              className="text-[48px] sm:text-[58px] md:text-[70px] lg:text-[78px] leading-[1.08] font-[800] tracking-[-0.035em] mb-7 text-textPrimary"
             >
               eDiscovery <br />
               Without the <br />
-              <span className="text-[#534AB7]">Guesswork.</span>
+              <span className="text-primary">Guesswork.</span>
             </motion.h1>
 
             {/* Subtitle */}
             <motion.p
               variants={itemVars}
-              className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-slate-500 font-medium max-w-[540px] mb-10"
+              className="text-[16px] sm:text-[18px] md:text-[19px] leading-[1.5] text-textSecondary font-medium max-w-[540px] mb-10"
             >
               Intelligent document review, transparent billing, no hidden costs,
               and no surprises.
@@ -80,16 +80,10 @@ export default function StripeHero() {
             >
               <Link
                 href="#contact"
-                className="bg-[#534AB7] hover:bg-[#3C3489] text-white px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold flex items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)] active:scale-[0.98] text-[15px] sm:text-[16px]"
+                className="bg-[#EBF2FF] text-[#3B5876] px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold flex items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(59,88,118,0.39)] hover:shadow-[0_6px_20px_rgba(59,88,118,0.23)] active:scale-[0.98] text-[15px] sm:text-[16px]"
               >
                 Get started
               </Link>
-              {/* <Link
-                href="#demo"
-                className="bg-white border border-slate-200 px-7 sm:px-8 py-3.5 sm:py-4 rounded-full font-bold text-slate-700 hover:border-slate-300 hover:shadow-sm transition-all duration-200 flex items-center active:scale-[0.98] text-[15px] sm:text-[16px]"
-              >
-                Request demo
-              </Link> */}
             </motion.div>
           </motion.div>
 

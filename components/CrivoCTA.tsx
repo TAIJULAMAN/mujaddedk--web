@@ -18,7 +18,7 @@ export default function CrivoCTA() {
   return (
     <section
       ref={containerRef}
-      className="relative py-24 md:py-32 bg-slate-50 overflow-hidden flex items-center justify-center font-sans"
+      className="relative py-24 md:py-32 bg-surfaceSunken overflow-hidden flex items-center justify-center font-sans"
     >
       {/* Animated Glowing Orbs (Softened for Light Mode) */}
       <motion.div
@@ -28,7 +28,7 @@ export default function CrivoCTA() {
           y: [0, -60, 0],
         }}
         transition={{ duration: 15, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-[#3478F6] opacity-[0.08] blur-[100px] rounded-full mix-blend-multiply pointer-events-none z-0"
+        className="absolute top-1/2 left-[20%] -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-primary opacity-[0.08] blur-[100px] rounded-full mix-blend-multiply pointer-events-none z-0"
       />
       <motion.div
         animate={{
@@ -37,7 +37,7 @@ export default function CrivoCTA() {
           y: [0, 80, 0],
         }}
         transition={{ duration: 18, repeat: Infinity, ease: "easeInOut" }}
-        className="absolute bottom-0 right-[15%] translate-x-1/4 w-[500px] h-[500px] bg-[#FF5DB1] opacity-[0.06] blur-[120px] rounded-full mix-blend-multiply pointer-events-none z-0"
+        className="absolute bottom-0 right-[15%] translate-x-1/4 w-[500px] h-[500px] bg-accent opacity-[0.06] blur-[120px] rounded-full mix-blend-multiply pointer-events-none z-0"
       />
 
       {/* Grid Pattern overlay */}
@@ -58,7 +58,7 @@ export default function CrivoCTA() {
           viewport={{ once: true }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           id="demo"
-          className="w-full relative rounded-3xl md:rounded-[40px] border border-slate-200 bg-white/70 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
+          className="w-full relative rounded-3xl md:rounded-[40px] border border-divider bg-white/70 backdrop-blur-2xl shadow-[0_20px_50px_-10px_rgba(0,0,0,0.05)] overflow-hidden"
         >
           {/* Subtle top border gradient */}
           <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-[#3478F6] to-transparent opacity-30" />
@@ -69,11 +69,11 @@ export default function CrivoCTA() {
               whileInView={{ opacity: 1, scale: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.2 }}
-              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-slate-100 border border-slate-200 text-[#3478F6] text-[11px] font-[800] tracking-[0.15em] uppercase mb-8"
+              className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-surfaceSunken border border-divider text-primary text-[11px] font-[800] tracking-[0.15em] uppercase mb-8"
             >
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#3478F6] opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#3478F6]"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
               </span>
               BOOK A DEMO
             </motion.div>
@@ -83,7 +83,7 @@ export default function CrivoCTA() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.3 }}
-              className="text-[34px] sm:text-[46px] md:text-[56px] font-[800] text-[#0A2540] leading-[1.1] tracking-tight mb-6 max-w-[800px]"
+              className="text-[34px] sm:text-[46px] md:text-[56px] font-[800] text-chromeDark leading-[1.1] tracking-tight mb-6 max-w-[800px]"
             >
               Ready to run your next matter on Crivo?
             </motion.h2>
@@ -108,7 +108,7 @@ export default function CrivoCTA() {
             >
               {/* Primary Premium Button */}
               <button className="relative group w-full sm:w-auto px-8 py-4 rounded-xl text-white font-bold flex items-center justify-center overflow-hidden shadow-[0_0_40px_-10px_rgba(52,120,246,0.4)] hover:shadow-[0_0_60px_-10px_rgba(52,120,246,0.6)] transition-all duration-300">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#3478F6] via-[#2563EB] to-[#6034f6] scale-[1.05] group-hover:scale-100 transition-transform duration-500" />
+                <div className="absolute inset-0 bg-gradient-to-r from-primary via-[#2563EB] to-[#6034f6] scale-[1.05] group-hover:scale-100 transition-transform duration-500" />
                 <span className="relative z-10 flex items-center gap-2 group-hover:translate-x-1 transition-transform duration-300">
                   <PlayCircle size={18} className="opacity-90" />
                   Schedule a Demonstration
@@ -118,20 +118,20 @@ export default function CrivoCTA() {
               {/* Secondary Premium Button */}
               {/* <a
                 href="#pricing"
-                className="w-full sm:w-auto bg-white border border-slate-200 hover:border-slate-300 text-slate-700 font-semibold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-slate-50 shadow-sm"
+                className="w-full sm:w-auto bg-white border border-divider hover:border-divider text-textPrimary font-semibold py-4 px-8 rounded-xl transition-all duration-300 flex items-center justify-center gap-2 group hover:bg-surfaceSunken shadow-sm"
               >
                 View Pricing
                 <ArrowRight
                   size={16}
-                  className="text-slate-400 group-hover:text-slate-700 group-hover:translate-x-1.5 transition-all duration-300"
+                  className="text-textTertiary group-hover:text-textPrimary group-hover:translate-x-1.5 transition-all duration-300"
                 />
               </a> */}
             </motion.div>
           </div>
 
           {/* Decorative Corner Glow */}
-          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-[#3478F6] opacity-[0.05] blur-[80px] rounded-full" />
-          <div className="absolute -top-32 -right-32 w-64 h-64 bg-[#FF5DB1] opacity-[0.05] blur-[80px] rounded-full" />
+          <div className="absolute -bottom-32 -left-32 w-64 h-64 bg-primary opacity-[0.05] blur-[80px] rounded-full" />
+          <div className="absolute -top-32 -right-32 w-64 h-64 bg-accent opacity-[0.05] blur-[80px] rounded-full" />
         </motion.div>
       </div>
     </section>

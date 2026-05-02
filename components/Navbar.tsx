@@ -66,9 +66,9 @@ export default function Navbar() {
   return (
     <>
       <nav
-        className={`fixed top-0 inset-x-0 z-[100] px-6 md:px-10 transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-[100] px-5 md:px-0 transition-all duration-300 ${
           scrolled
-            ? "py-3 bg-white/90 backdrop-blur-md border-b border-slate-100 shadow-sm"
+            ? "py-3 bg-white/90 backdrop-blur-md shadow-md"
             : "py-5 bg-transparent"
         }`}
       >
@@ -77,7 +77,7 @@ export default function Navbar() {
             {/* Logo */}
             <Link href="/" className="flex items-center select-none pt-1">
               <Image
-                src="/crivo.png"
+                src="/crivo2.png"
                 alt="crivo.legal"
                 width={220}
                 height={60}
@@ -87,15 +87,17 @@ export default function Navbar() {
             </Link>
 
             {/* Desktop Links */}
-            <div className="hidden lg:flex items-center gap-1 text-[15px] font-semibold text-slate-600">
+            <div
+              className={`hidden lg:flex items-center gap-1 text-[15px] font-semibold text-primary`}
+            >
               {navLinks.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href || "#"}
                   className={`px-4 py-2 rounded-full transition-all duration-200 ${
                     item.active
-                      ? "bg-[#EEEDFE] text-[#534AB7] font-[700]"
-                      : "hover:bg-[#EEEDFE]/60 hover:text-[#534AB7]"
+                      ? "bg-[#1e3a5f] text-white font-[700]"
+                      : "hover:bg-[#1e3a5f] hover:text-white"
                   }`}
                 >
                   {item.name}
@@ -105,21 +107,18 @@ export default function Navbar() {
           </div>
 
           <div className="flex items-center gap-3">
-            {/* <button className="hidden md:block px-[18px] py-[8px] rounded-full text-[15px] font-bold text-slate-600 hover:text-slate-900 transition-colors duration-200">
-              Sign in
-            </button> */}
             <Link
               href="#contact"
-              className="hidden md:flex bg-[#534AB7] hover:bg-[#3C3489] text-white px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)] hover:shadow-[0_6px_20px_rgba(83,74,183,0.23)]"
+              className="hidden md:flex bg-[#EBF2FF] text-[#3B5876] px-[18px] py-[8px] rounded-full text-[14px] font-bold items-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(59,88,118,0.39)] hover:shadow-[0_6px_20px_rgba(59,88,118,0.23)]"
             >
               Request demo
             </Link>
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 rounded-lg hover:bg-slate-100 transition-colors"
+              className="lg:hidden p-2 rounded-lg transition-colors hover:bg-[#1e3a5f]/10 text-[#1e3a5f]"
               onClick={() => setMobileMenuOpen(true)}
             >
-              <Menu size={22} className="text-slate-800" />
+              <Menu size={22} className="text-[#1e3a5f]" />
             </button>
           </div>
         </div>
@@ -143,16 +142,16 @@ export default function Navbar() {
               animate={{ x: 0 }}
               exit={{ x: "100%" }}
               transition={{ type: "spring", damping: 25, stiffness: 200 }}
-              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-[350px] bg-white z-[102] lg:hidden shadow-2xl flex flex-col"
+              className="fixed top-0 right-0 bottom-0 w-[80%] max-w-[350px] bg-[#1e3a5f/20] z-9999 lg:hidden shadow-2xl flex flex-col"
             >
-              <div className="p-5 flex items-center justify-between border-b border-slate-100">
+              <div className="p-5 flex items-center justify-between border-b border-white/10">
                 <Link
                   href="/"
                   className="flex items-center select-none pt-1"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Image
-                    src="/crivo.png"
+                    src="/crivo2.png"
                     alt="crivo.legal"
                     width={110}
                     height={30}
@@ -161,13 +160,13 @@ export default function Navbar() {
                 </Link>
                 <button
                   onClick={() => setMobileMenuOpen(false)}
-                  className="p-2 rounded-lg hover:bg-slate-100 transition-colors"
+                  className="p-2 rounded-lg hover:bg-white/10 transition-colors"
                 >
-                  <X size={22} className="text-slate-800" />
+                  <X size={22} className="text-white" />
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto py-6 px-5 flex flex-col gap-2 text-[16px] font-semibold text-slate-700">
+              <div className="flex-1 overflow-y-auto py-6 px-5 flex flex-col gap-2 text-[16px] font-semibold text-white/90">
                 {navLinks.map((item) => (
                   <Link
                     key={item.name}
@@ -175,8 +174,8 @@ export default function Navbar() {
                     onClick={() => setMobileMenuOpen(false)}
                     className={`block px-4 py-3 rounded-xl transition-colors ${
                       item.active
-                        ? "bg-[#EEEDFE] text-[#534AB7] font-[700]"
-                        : "hover:bg-slate-50 hover:text-[#534AB7]"
+                        ? "bg-white/10 text-white font-[700]"
+                        : "hover:bg-white/5 hover:text-white"
                     }`}
                   >
                     {item.name}
@@ -184,14 +183,11 @@ export default function Navbar() {
                 ))}
               </div>
 
-              <div className="p-5 border-t border-slate-100 flex flex-col gap-3">
-                {/* <button className="w-full px-[18px] py-[12px] rounded-xl text-[15px] font-bold text-slate-700 border border-slate-200 hover:bg-slate-50 hover:text-slate-900 transition-all duration-200">
-                  Sign in
-                </button> */}
+              <div className="p-5 border-t border-white/10 flex flex-col gap-3">
                 <Link
-                  href="#demo"
+                  href="#contact"
                   onClick={() => setMobileMenuOpen(false)}
-                  className="w-full bg-[#534AB7] flex hover:bg-[#3C3489] text-white px-[18px] py-[12px] rounded-xl text-[15px] font-bold items-center justify-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(83,74,183,0.39)]"
+                  className="w-full bg-[#EBF2FF] flex hover:bg-chromeDark text-[#3B5876] px-[18px] py-[12px] rounded-xl text-[15px] font-bold items-center justify-center transition-all duration-200 shadow-[0_4px_14px_0_rgba(59,88,118,0.39)]"
                 >
                   Request demo
                 </Link>

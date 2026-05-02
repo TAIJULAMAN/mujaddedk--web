@@ -28,10 +28,10 @@ export default function CrivoContact() {
   return (
     <section
       id="contact"
-      className="relative py-24 md:py-32 bg-white overflow-hidden font-sans"
+      className="relative py-10 md:py-24 bg-white overflow-hidden font-sans"
     >
-      <div className="max-w-[1400px] mx-auto px-6 md:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-start">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-0 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-16 items-start">
           {/* Left Column: Content */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -39,14 +39,13 @@ export default function CrivoContact() {
             viewport={{ once: true }}
             transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
           >
-            <h4 className="text-[12px] font-[800] text-[#534AB7] tracking-[0.15em] uppercase mb-6 flex items-center gap-3">
-              <span className="w-8 h-[1px] bg-[#534AB7]" />
+            <h4 className="text-[12px] font-[800] text-[#3B5876] tracking-[0.15em] uppercase mb-5">
               Contact Us
             </h4>
-            <h2 className="text-[40px] md:text-[56px] font-[800] text-[#0A2540] leading-[1.1] tracking-tight mb-8">
+            <h2 className="text-[40px] md:text-[56px] font-[800] text-chromeDark leading-[1.1] tracking-tight mb-8">
               Let&apos;s start a conversation about your matters.
             </h2>
-            <p className="text-[18px] text-slate-500 font-medium leading-relaxed mb-12 max-w-[500px]">
+            <p className="text-[18px] text-textSecondary font-medium leading-relaxed mb-12 max-w-[500px]">
               Whether you&apos;re curious about our features, pricing, or how we
               can help your firm, our team is ready to answer all your
               questions.
@@ -62,20 +61,20 @@ export default function CrivoContact() {
             className="relative"
           >
             {/* Background Decorative Element */}
-            <div className="absolute -inset-4 bg-slate-50 rounded-[40px] -z-10" />
+            <div className="absolute -inset-4 bg-surfaceSunken rounded-[40px] -z-10" />
 
-            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] border border-slate-100">
+            <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] border border-divider">
               <form onSubmit={handleSubmit} className="space-y-6">
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
                     <label
                       htmlFor="name"
-                      className="text-[13px] font-bold text-slate-700 ml-1"
+                      className="text-[13px] font-bold text-textPrimary ml-1"
                     >
                       Full Name
                     </label>
                     <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-textTertiary">
                         <User size={18} />
                       </div>
                       <input
@@ -83,7 +82,7 @@ export default function CrivoContact() {
                         id="name"
                         required
                         placeholder="John Doe"
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20 focus:border-[#534AB7] transition-all placeholder:text-slate-400"
+                        className="w-full pl-12 pr-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
                         value={formState.name}
                         onChange={(e) =>
                           setFormState({ ...formState, name: e.target.value })
@@ -94,12 +93,12 @@ export default function CrivoContact() {
                   <div className="space-y-2">
                     <label
                       htmlFor="email"
-                      className="text-[13px] font-bold text-slate-700 ml-1"
+                      className="text-[13px] font-bold text-textPrimary ml-1"
                     >
                       Work Email
                     </label>
                     <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">
+                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-textTertiary">
                         <Mail size={18} />
                       </div>
                       <input
@@ -107,7 +106,7 @@ export default function CrivoContact() {
                         id="email"
                         required
                         placeholder="john@firm.com"
-                        className="w-full pl-12 pr-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20 focus:border-[#534AB7] transition-all placeholder:text-slate-400"
+                        className="w-full pl-12 pr-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
                         value={formState.email}
                         onChange={(e) =>
                           setFormState({ ...formState, email: e.target.value })
@@ -120,7 +119,7 @@ export default function CrivoContact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="subject"
-                    className="text-[13px] font-bold text-slate-700 ml-1"
+                    className="text-[13px] font-bold text-textPrimary ml-1"
                   >
                     Subject
                   </label>
@@ -128,7 +127,7 @@ export default function CrivoContact() {
                     type="text"
                     id="subject"
                     placeholder="How can we help?"
-                    className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20 focus:border-[#534AB7] transition-all placeholder:text-slate-400"
+                    className="w-full px-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
                     value={formState.subject}
                     onChange={(e) =>
                       setFormState({ ...formState, subject: e.target.value })
@@ -139,7 +138,7 @@ export default function CrivoContact() {
                 <div className="space-y-2">
                   <label
                     htmlFor="message"
-                    className="text-[13px] font-bold text-slate-700 ml-1"
+                    className="text-[13px] font-bold text-textPrimary ml-1"
                   >
                     Message
                   </label>
@@ -148,7 +147,7 @@ export default function CrivoContact() {
                     required
                     rows={4}
                     placeholder="How can we help you?"
-                    className="w-full px-4 py-4 bg-slate-50 border border-slate-200 rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-[#534AB7]/20 focus:border-[#534AB7] transition-all placeholder:text-slate-400 resize-none"
+                    className="w-full px-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary resize-none"
                     value={formState.message}
                     onChange={(e) =>
                       setFormState({ ...formState, message: e.target.value })
@@ -162,7 +161,7 @@ export default function CrivoContact() {
                   className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-300 ${
                     isSubmitted
                       ? "bg-green-500 text-white shadow-[0_10px_20px_rgba(34,197,94,0.3)]"
-                      : "bg-[#534AB7] hover:bg-[#3C3489] text-white shadow-[0_10px_20px_rgba(83,74,183,0.3)]"
+                      : "bg-primary hover:bg-chromeDark text-[#3B5876] shadow-[0_10px_20px_rgba(59,88,118,0.3)]"
                   }`}
                 >
                   {isSubmitting ? (

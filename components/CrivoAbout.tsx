@@ -42,17 +42,17 @@ export default function CrivoAbout() {
   return (
     <section
       id="about"
-      className="relative bg-white py-24 md:py-32"
+      className="relative bg-white py-10 md:py-24"
       ref={containerRef}
     >
-      <div className="max-w-[1200px] mx-auto px-6 md:px-8">
+      <div className="max-w-[1400px] mx-auto px-5 md:px-0">
         {/* Header Section */}
         <div className="max-w-4xl mb-16 md:mb-24">
           <motion.h4
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            className="text-[11px] font-[800] text-[#0066FF] tracking-[0.2em] uppercase mb-6"
+            className="text-[11px] font-[800] text-[#3B5876] tracking-[0.2em] uppercase mb-5"
           >
             END-TO-END IN ONE PLATFORM
           </motion.h4>
@@ -61,7 +61,7 @@ export default function CrivoAbout() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.1 }}
-            className="text-[40px] md:text-[56px] font-[700] text-[#0A2540] leading-[1.1] mb-6 font-serif tracking-tight"
+            className="text-[40px] md:text-[56px] font-[700] text-chromeDark leading-[1.1] mb-6 font-serif tracking-tight"
           >
             Every stage of discovery.
             <br />
@@ -72,11 +72,11 @@ export default function CrivoAbout() {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: 0.2 }}
-            className="text-[18px] md:text-[20px] text-slate-500 font-medium leading-relaxed max-w-3xl"
+            className="text-[18px] md:text-[20px] text-textSecondary font-medium leading-relaxed max-w-3xl"
           >
             From first custodian interview to final production, Crivo handles
-            the complete EDRM workflow — no platform juggling, no data migration,
-            all in one.
+            the complete EDRM workflow — no platform juggling, no data
+            migration, all in one.
           </motion.p>
         </div>
 
@@ -103,17 +103,17 @@ export default function CrivoAbout() {
 
                   {/* Step Content */}
                   <div>
-                    <h3 className="text-[20px] font-bold text-[#0A2540] mb-3">
+                    <h3 className="text-[20px] font-bold text-chromeDark mb-3">
                       {step.title}
                     </h3>
-                    <p className="text-[15px] text-slate-500 leading-relaxed">
+                    <p className="text-[15px] text-textSecondary leading-relaxed">
                       {step.description}
                     </p>
                   </div>
 
                   {/* Divider line between steps (except last one) */}
                   {index < steps.length - 1 && (
-                    <div className="w-full h-[1px] bg-slate-100 mt-12 bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-50" />
+                    <div className="w-full h-[1px] bg-surfaceSunken mt-12 bg-gradient-to-r from-transparent via-slate-200 to-transparent opacity-50" />
                   )}
                 </motion.div>
               ))}

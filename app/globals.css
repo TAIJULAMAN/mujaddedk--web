@@ -42,10 +42,18 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
-  --color-stripe-purple: #635bff;
-  --color-stripe-dark: #0a2540;
-  --color-stripe-slate: #425466;
-  --color-stripe-light: #ad6bff;
+  --color-primary: #3B5876;
+  --color-chrome-dark: #1E3A5F;
+  --color-accent: #F59E0B;
+  --color-surface: #FFFFFF;
+  --color-surface-sunken: #F3F5F8;
+  --color-divider: #DCE3ED;
+  --color-text-primary: #111827;
+  --color-text-secondary: #4B5563;
+  --color-text-tertiary: #9CA3AF;
+  --color-text-disabled: #D1D5DB;
+  --color-text-on-dark: #FFFFFF;
+  --color-text-link: #2563EB;
 }
 
 body {
