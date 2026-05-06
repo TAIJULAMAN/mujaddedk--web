@@ -47,9 +47,8 @@ export default function CrivoFooter() {
           <div className="flex flex-wrap gap-x-10 gap-y-4">
             {[
               { name: "Platform", href: "#features" },
-              { name: "Pricing", href: "#pricing" },
               { name: "About", href: "#about" },
-              { name: "Contact Us", href: "mailto:hello@crivo.legal" },
+              { name: "Contact Us", href: "mailto:crivolegal@gmail.com" },
             ].map((link) => (
               <a
                 key={link.name}

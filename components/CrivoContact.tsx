@@ -161,7 +161,7 @@ export default function CrivoContact() {
                   className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-300 ${
                     isSubmitted
                       ? "bg-green-500 text-white shadow-[0_10px_20px_rgba(34,197,94,0.3)]"
-                      : "bg-primary hover:bg-chromeDark text-[#3B5876] shadow-[0_10px_20px_rgba(59,88,118,0.3)]"
+                      : "bg-primary hover:bg-chromeDark text-white shadow-[0_10px_20px_rgba(59,88,118,0.3)]"
                   }`}
                 >
                   {isSubmitting ? (
