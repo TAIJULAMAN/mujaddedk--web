@@ -7,7 +7,6 @@ import { Mail, MessageCircle, Send, User, ChevronRight } from "lucide-react";
 export default function CrivoContact() {
   const [formState, setFormState] = useState({
     name: "",
-    email: "",
     subject: "",
     message: "",
   });
@@ -15,14 +14,36 @@ export default function CrivoContact() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
-    // Simulate API call
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    setIsSubmitting(false);
-    setIsSubmitted(true);
-    setTimeout(() => setIsSubmitted(false), 5000);
+
+    const { name, subject, message } = formState;
+
+    // Construct the mailto URL
+    const mailtoSubject = encodeURIComponent(
+      subject || `Contact Inquiry from ${name}`
+    );
+    const mailtoBody = encodeURIComponent(
+      `Name: ${name}\n\nMessage:\n${message}`
+    );
+
+    const mailtoUrl = `mailto:Support@Crivo.Legal?subject=${mailtoSubject}&body=${mailtoBody}`;
+
+    // Open the default mail client
+    window.location.href = mailtoUrl;
+
+    // Success feedback and reset form
+    setTimeout(() => {
+      setIsSubmitting(false);
+      setIsSubmitted(true);
+      setFormState({
+        name: "",
+        subject: "",
+        message: "",
+      });
+      setTimeout(() => setIsSubmitted(false), 5000);
+    }, 1000);
   };
 
   return (
@@ -50,6 +71,23 @@ export default function CrivoContact() {
               can help your firm, our team is ready to answer all your
               questions.
             </p>
+
+            <div className="flex flex-col gap-6">
+              <a
+                href="mailto:Support@Crivo.Legal"
+                className="group flex items-center gap-4 text-primary font-bold hover:text-chromeDark transition-all duration-300 w-fit"
+              >
+                <div className="w-12 h-12 rounded-2xl bg-surfaceSunken flex items-center justify-center group-hover:scale-110 transition-transform duration-300 border border-divider shadow-sm">
+                  <Mail size={22} className="text-primary" />
+                </div>
+                <div className="flex flex-col">
+                  <span className="text-[11px] text-textTertiary font-extrabold uppercase tracking-[0.1em]">
+                    Direct Email
+                  </span>
+                  <span className="text-[18px]">Support@Crivo.Legal</span>
+                </div>
+              </a>
+            </div>
           </motion.div>
 
           {/* Right Column: Form Card */}
@@ -65,54 +103,28 @@ export default function CrivoContact() {
 
             <div className="bg-white rounded-3xl p-8 md:p-10 shadow-[0_20px_50px_-15px_rgba(0,0,0,0.08)] border border-divider">
               <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="name"
-                      className="text-[13px] font-bold text-textPrimary ml-1"
-                    >
-                      Full Name
-                    </label>
-                    <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-textTertiary">
-                        <User size={18} />
-                      </div>
-                      <input
-                        type="text"
-                        id="name"
-                        required
-                        placeholder="John Doe"
-                        className="w-full pl-12 pr-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
-                        value={formState.name}
-                        onChange={(e) =>
-                          setFormState({ ...formState, name: e.target.value })
-                        }
-                      />
+                <div className="space-y-2">
+                  <label
+                    htmlFor="name"
+                    className="text-[13px] font-bold text-textPrimary ml-1"
+                  >
+                    Full Name
+                  </label>
+                  <div className="relative">
+                    <div className="absolute left-4 top-1/2 -translate-y-1/2 text-textTertiary">
+                      <User size={18} />
                     </div>
-                  </div>
-                  <div className="space-y-2">
-                    <label
-                      htmlFor="email"
-                      className="text-[13px] font-bold text-textPrimary ml-1"
-                    >
-                      Work Email
-                    </label>
-                    <div className="relative">
-                      <div className="absolute left-4 top-1/2 -translate-y-1/2 text-textTertiary">
-                        <Mail size={18} />
-                      </div>
-                      <input
-                        type="email"
-                        id="email"
-                        required
-                        placeholder="john@firm.com"
-                        className="w-full pl-12 pr-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
-                        value={formState.email}
-                        onChange={(e) =>
-                          setFormState({ ...formState, email: e.target.value })
-                        }
-                      />
-                    </div>
+                    <input
+                      type="text"
+                      id="name"
+                      required
+                      placeholder="John Doe"
+                      className="w-full pl-12 pr-4 py-4 bg-surfaceSunken border border-divider rounded-xl text-[15px] focus:outline-none focus:ring-2 focus:ring-primary/20 focus:border-primary transition-all placeholder:text-textTertiary"
+                      value={formState.name}
+                      onChange={(e) =>
+                        setFormState({ ...formState, name: e.target.value })
+                      }
+                    />
                   </div>
                 </div>
 
@@ -158,11 +170,10 @@ export default function CrivoContact() {
                 <button
                   type="submit"
                   disabled={isSubmitting}
-                  className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-300 ${
-                    isSubmitted
-                      ? "bg-green-500 text-white shadow-[0_10px_20px_rgba(34,197,94,0.3)]"
-                      : "bg-primary hover:bg-chromeDark text-white shadow-[0_10px_20px_rgba(59,88,118,0.3)]"
-                  }`}
+                  className={`w-full py-4 rounded-xl font-bold flex items-center justify-center gap-3 transition-all duration-300 ${isSubmitted
+                    ? "bg-green-500 text-white shadow-[0_10px_20px_rgba(34,197,94,0.3)]"
+                    : "bg-primary hover:bg-chromeDark text-white shadow-[0_10px_20px_rgba(59,88,118,0.3)]"
+                    }`}
                 >
                   {isSubmitting ? (
                     <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
